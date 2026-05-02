@@ -242,10 +242,10 @@ world-ai/
 #### Ordre d'implémentation (suivre dans l'ordre strict)
 
 **Étape 1.1 — Infrastructure Docker**
-- [ ] `docker-compose.yml` complet avec tous les services
-- [ ] `docker-compose.dev.yml` override pour dev local
-- [ ] `.env.example` avec toutes les variables nécessaires
-- [ ] `.gitignore` strict (Python, Node, secrets, .env)
+- [x] `docker-compose.yml` complet avec tous les services
+- [x] `docker-compose.dev.yml` override pour dev local
+- [x] `.env.example` avec toutes les variables nécessaires
+- [x] `.gitignore` strict (Python, Node, secrets, .env)
 - [ ] Test : `docker-compose up -d` → tous services healthy
 
 **Étape 1.2 — Routeur LLM Tiéré**
@@ -562,5 +562,5 @@ Pour chaque interaction, logger :
 
 ---
 
-*Dernière mise à jour : Phase 00 complétée — Phase 01 démarrée*
-*Maintenu par : [TON NOM] + Claude Code (Opus 4.6)*
+*Dernière mise à jour : Phase 01 — Étape 1.1 complétée (Infrastructure Docker)*
+*Maintenu par : Alexis Druaux + Claude Code (Sonnet 4.6)*
