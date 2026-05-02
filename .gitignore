@@ -1,0 +1,138 @@
+# ══════════════════════════════════════════
+# WORLD AI — .gitignore
+# ══════════════════════════════════════════
+
+# ── Environnement (CRITIQUE — jamais committer) ──
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.env
+
+# ── Python ────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.pyc
+*.pyo
+
+# Virtualenvs
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Tests et couverture
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.coveragerc
+nosetests.xml
+test-results/
+
+# Type checkers
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# Linters
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# ── Node.js ───────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Build output
+.next/
+out/
+.nuxt/
+dist/
+.output/
+.vercel/
+.netlify/
+
+# ── Secrets et Certificats (CRITIQUE) ────
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+secrets/
+certs/
+acme.json
+vault-token
+
+# ── Docker ────────────────────────────────
+.docker/
+
+# ── Logs ──────────────────────────────────
+logs/
+*.log
+*.log.*
+log/
+
+# ── Données locales ───────────────────────
+data/
+storage/
+uploads/
+
+# ── Éditeurs et OS ────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── Divers ───────────────────────────────
+*.bak
+*.tmp
+*.temp
+.cache/
