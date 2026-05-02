@@ -249,11 +249,11 @@ world-ai/
 - [ ] Test : `docker-compose up -d` → tous services healthy
 
 **Étape 1.2 — Routeur LLM Tiéré**
-- [ ] `core/router/models.py` : définition des modèles (budget/mid/frontier)
-- [ ] `core/router/confidence.py` : calcul score confiance (longueur, complexité, domaine)
-- [ ] `core/router/router.py` : logique routing (score → sélection modèle)
-- [ ] `config/settings.py` : settings centralisées avec pydantic-settings
-- [ ] Test unitaire : requête simple → DeepSeek, requête complexe → Claude
+- [x] `core/router/models.py` : définition des modèles (budget/mid/frontier)
+- [x] `core/router/confidence.py` : calcul score confiance (longueur, complexité, domaine)
+- [x] `core/router/router.py` : logique routing (score → sélection modèle)
+- [x] `config/settings.py` : settings centralisées avec pydantic-settings
+- [x] Test unitaire : requête simple → DeepSeek, requête complexe → Claude (29 tests, 100%)
 
 **Étape 1.3 — Agent Cascade (SAS)**
 - [ ] `core/cascade/agent.py` : agent unique principal avec tool-calling
@@ -562,5 +562,5 @@ Pour chaque interaction, logger :
 
 ---
 
-*Dernière mise à jour : Phase 01 — Étape 1.1 complétée (Infrastructure Docker)*
+*Dernière mise à jour : Phase 01 — Étape 1.2 complétée (Routeur LLM Tiéré)*
 *Maintenu par : Alexis Druaux + Claude Code (Sonnet 4.6)*
