@@ -339,6 +339,67 @@ services:
       - "traefik.http.routers.dify-web.tls.certresolver=letsencrypt"
       - "traefik.http.services.dify-web.loadbalancer.server.port=3000"
 
+  # ────────────────────────────────────────────────────────────
+  # GATEWAY MULTI-CANAL — Point d'entrée unifié (Couche 5)
+  # REST webhooks : https://api.<WORLDAI_DOMAIN>/webhook/{channel}
+  # WebSocket chat : wss://api.<WORLDAI_DOMAIN>/ws
+  # REST public API : https://api.<WORLDAI_DOMAIN>/v1
+  # Ports internes : 8100 (webhook/REST), 8101 (WebSocket), 8102 (API publique)
+  # ────────────────────────────────────────────────────────────
+  gateway:
+    build:
+      context: .
+      dockerfile: interfaces/Dockerfile
+    container_name: worldai-gateway
+    restart: unless-stopped
+    environment:
+      WORLDAI_ENV: ${WORLDAI_ENV:-production}
+      WORLDAI_TELEGRAM_BOT_TOKEN: ${WORLDAI_TELEGRAM_BOT_TOKEN:-}
+      WORLDAI_DISCORD_BOT_TOKEN: ${WORLDAI_DISCORD_BOT_TOKEN:-}
+      WORLDAI_DISCORD_GUILD_ID: ${WORLDAI_DISCORD_GUILD_ID:-}
+      WORLDAI_SLACK_BOT_TOKEN: ${WORLDAI_SLACK_BOT_TOKEN:-}
+      WORLDAI_SLACK_SIGNING_SECRET: ${WORLDAI_SLACK_SIGNING_SECRET:-}
+      WORLDAI_SLACK_APP_TOKEN: ${WORLDAI_SLACK_APP_TOKEN:-}
+      WORLDAI_WHATSAPP_MODE: ${WORLDAI_WHATSAPP_MODE:-twilio}
+      WORLDAI_TWILIO_ACCOUNT_SID: ${WORLDAI_TWILIO_ACCOUNT_SID:-}
+      WORLDAI_TWILIO_AUTH_TOKEN: ${WORLDAI_TWILIO_AUTH_TOKEN:-}
+      WORLDAI_TWILIO_WHATSAPP_NUMBER: ${WORLDAI_TWILIO_WHATSAPP_NUMBER:-}
+      WORLDAI_EMAIL_IMAP_HOST: ${WORLDAI_EMAIL_IMAP_HOST:-}
+      WORLDAI_EMAIL_IMAP_PORT: ${WORLDAI_EMAIL_IMAP_PORT:-993}
+      WORLDAI_EMAIL_SMTP_HOST: ${WORLDAI_EMAIL_SMTP_HOST:-}
+      WORLDAI_EMAIL_SMTP_PORT: ${WORLDAI_EMAIL_SMTP_PORT:-587}
+      WORLDAI_EMAIL_ADDRESS: ${WORLDAI_EMAIL_ADDRESS:-}
+      WORLDAI_EMAIL_PASSWORD: ${WORLDAI_EMAIL_PASSWORD:-}
+      WORLDAI_IMESSAGE_ENABLED: ${WORLDAI_IMESSAGE_ENABLED:-false}
+      WORLDAI_WEBCHAT_SECRET: ${WORLDAI_WEBCHAT_SECRET:-}
+      WORLDAI_API_PUBLIC_KEY: ${WORLDAI_API_PUBLIC_KEY:-}
+      WORLDAI_REDIS_URL: redis://:${WORLDAI_REDIS_PASSWORD}@redis:6379/2
+      WORLDAI_OPENROUTER_API_KEY: ${WORLDAI_OPENROUTER_API_KEY:-}
+      WORLDAI_LLM_BUDGET_MODEL: ${WORLDAI_LLM_BUDGET_MODEL:-deepseek/deepseek-chat}
+      WORLDAI_LLM_MID_MODEL: ${WORLDAI_LLM_MID_MODEL:-meta-llama/llama-4-scout}
+      WORLDAI_LLM_FRONTIER_MODEL: ${WORLDAI_LLM_FRONTIER_MODEL:-anthropic/claude-opus-4-6}
+      WORLDAI_CONFIDENCE_THRESHOLD: ${WORLDAI_CONFIDENCE_THRESHOLD:-0.75}
+      WORLDAI_LANGFUSE_SECRET_KEY: ${WORLDAI_LANGFUSE_SECRET_KEY:-}
+      WORLDAI_LANGFUSE_PUBLIC_KEY: ${WORLDAI_LANGFUSE_PUBLIC_KEY:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - worldai-internal
+      - worldai-public
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gateway.rule=Host(`api.${WORLDAI_DOMAIN}`)"
+      - "traefik.http.routers.gateway.entrypoints=websecure"
+      - "traefik.http.routers.gateway.tls.certresolver=letsencrypt"
+      - "traefik.http.services.gateway.loadbalancer.server.port=8100"
+
 # ══════════════════════════════════════════════════════════════
 # NETWORKS
 # ══════════════════════════════════════════════════════════════
