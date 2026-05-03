@@ -60,6 +60,12 @@ class Settings(BaseSettings):
     dify_secret_key: str = ""
     dify_version: str = "0.6.14"
 
+    # ── MCP Servers ─────────────────────────────────────────────────
+    brave_api_key: str = ""
+    mcp_sandbox_root: str = "/data/user"
+    mcp_fetch_timeout_s: int = 15
+    mcp_fetch_max_bytes: int = 524288  # 512 KB
+
 
 _settings: Settings | None = None
 
