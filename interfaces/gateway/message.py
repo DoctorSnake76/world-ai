@@ -34,6 +34,7 @@ class Attachment(BaseModel):
     filename: str | None = None
     mime_type: str | None = None
     size_bytes: int | None = None
+    metadata: dict[str, Any] = Field(default_factory=dict)
 
     model_config = {"arbitrary_types_allowed": True}
 
