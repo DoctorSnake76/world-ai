@@ -44,6 +44,9 @@ class Settings(BaseSettings):
     confidence_threshold: float = 0.75
     simulation_threshold: float = 0.40
 
+    # ── Local inference (xLAM-2 via llama.cpp) ─────────────────────
+    xlam_local_url: str = ""   # e.g. http://localhost:8080/v1 — empty = disabled
+
     # ── n8n ─────────────────────────────────────────────────────────
     n8n_encryption_key: str = ""
 
