@@ -256,11 +256,14 @@ world-ai/
 - [x] Test unitaire : requête simple → DeepSeek, requête complexe → Claude (29 tests, 100%)
 
 **Étape 1.3 — Agent Cascade (SAS)**
-- [ ] `core/cascade/agent.py` : agent unique principal avec tool-calling
-- [ ] `core/cascade/evaluator.py` : évaluation difficulté post-réponse
-- [ ] Intégration OpenRouter API
-- [ ] Intégration xLAM-2 local (llama.cpp)
-- [ ] Test : conversation basique + appel d'outil simple
+- [x] `core/cascade/agent.py` : agent unique principal avec tool-calling
+- [x] `core/cascade/evaluator.py` : évaluation qualité post-réponse
+- [x] `core/cascade/types.py` : types partagés (UserRequest, AgentResponse, ToolCall…)
+- [x] `core/cascade/openrouter.py` : client HTTP async OpenRouter (OpenAI-compatible)
+- [x] `core/cascade/dispatcher.py` : escalade MAS vers modèle frontier
+- [x] Intégration OpenRouter API
+- [x] Intégration xLAM-2 local (llama.cpp) via WORLDAI_XLAM_LOCAL_URL
+- [x] Test : 41 tests unitaires — évaluateur + pipeline CascadeAgent (100%)
 
 **Étape 1.4 — MCP Servers de base**
 - [ ] `nervous/servers/filesystem_mcp.py` : lecture/écriture fichiers (sandbox /data/user/)
@@ -562,5 +565,5 @@ Pour chaque interaction, logger :
 
 ---
 
-*Dernière mise à jour : Phase 01 — Étape 1.2 complétée (Routeur LLM Tiéré)*
+*Dernière mise à jour : Phase 01 — Étape 1.3 complétée (Agent Cascade SAS — 70 tests, 100%)*
 *Maintenu par : Alexis Druaux + Claude Code (Sonnet 4.6)*
