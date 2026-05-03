@@ -140,8 +140,15 @@ class FilesystemMCP(BaseMCPServer):
     def __init__(self, sandbox_root: str | None = None) -> None:
         root = sandbox_root or get_settings().mcp_sandbox_root
         self._root = Path(root).resolve()
-        self._root.mkdir(parents=True, exist_ok=True)
+        # Directory is created lazily on first write to avoid errors at import time
+        # when running outside Docker (e.g. during tests with a tmp_path override).
+        self._root_initialised = False
         logger.info("filesystem_mcp_ready", sandbox=str(self._root))
+
+    def _ensure_root(self) -> None:
+        if not self._root_initialised:
+            self._root.mkdir(parents=True, exist_ok=True)
+            self._root_initialised = True
 
     @property
     def name(self) -> str:
@@ -158,6 +165,7 @@ class FilesystemMCP(BaseMCPServer):
         Strips leading slashes so the caller can pass either ``notes/todo.txt``
         or ``/notes/todo.txt`` interchangeably.
         """
+        self._ensure_root()
         clean = path.lstrip("/")
         resolved = (self._root / clean).resolve()
         # resolve() follows symlinks — safe to compare string prefixes after
