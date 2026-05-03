@@ -95,6 +95,16 @@ def evaluate_response(request: UserRequest, response: AgentResponse) -> float:
         logger.warning("evaluator_error_in_response", error=response.error)
         return 0.0
 
+    # Hard early returns for unambiguous failure cases
+    if not response.content.strip():
+        logger.warning("evaluator_empty_content")
+        return 0.0
+
+    # A short response that only contains a refusal phrase is a hard failure
+    if _REFUSAL_RE.search(response.content) and len(response.content) < 120:
+        logger.warning("evaluator_short_refusal")
+        return 0.10
+
     factors = {
         "length":     _length_adequacy(request, response),
         "refusal":    _refusal_factor(response),
