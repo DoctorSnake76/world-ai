@@ -123,6 +123,39 @@ services:
     ports:
       - "3000:3000"
 
+  # Gateway en hot-reload (uvicorn --reload)
+  gateway:
+    build:
+      context: .
+      dockerfile: interfaces/Dockerfile
+    command:
+      - "uvicorn"
+      - "interfaces.gateway.gateway:app"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8100"
+      - "--reload"
+      - "--log-level"
+      - "debug"
+    environment:
+      WORLDAI_ENV: development
+      WORLDAI_TELEGRAM_BOT_TOKEN: ${WORLDAI_TELEGRAM_BOT_TOKEN:-}
+      WORLDAI_DISCORD_BOT_TOKEN: ${WORLDAI_DISCORD_BOT_TOKEN:-}
+      WORLDAI_SLACK_BOT_TOKEN: ${WORLDAI_SLACK_BOT_TOKEN:-}
+      WORLDAI_WEBCHAT_SECRET: ${WORLDAI_WEBCHAT_SECRET:-dev-webchat-secret}
+      WORLDAI_API_PUBLIC_KEY: ${WORLDAI_API_PUBLIC_KEY:-dev-api-key}
+      WORLDAI_REDIS_URL: redis://:${WORLDAI_REDIS_PASSWORD:-devpassword}@redis:6379/2
+      WORLDAI_OPENROUTER_API_KEY: ${WORLDAI_OPENROUTER_API_KEY:-}
+      WORLDAI_CONFIDENCE_THRESHOLD: "0.75"
+    volumes:
+      # Hot-reload : monte le code source
+      - ./interfaces:/app/interfaces
+      - ./core:/app/core
+      - ./config:/app/config
+    ports:
+      - "8100:8100"
+
 # En dev le réseau internal n'est pas isolé pour faciliter le debug
 networks:
   worldai-internal:
