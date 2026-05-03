@@ -40,7 +40,13 @@ _WEIGHTS: dict[str, float] = {
 
 
 def _length_adequacy(request: UserRequest, response: AgentResponse) -> float:
-    """Penalize responses that are too short relative to the request."""
+    """Penalize responses that are too short relative to the request.
+
+    Tool-call-only responses are exempt — empty text content is by design.
+    """
+    if response.tool_calls:
+        return 1.0
+
     req_len = len(request.last_user_content)
     resp_len = len(response.content)
 
@@ -96,7 +102,8 @@ def evaluate_response(request: UserRequest, response: AgentResponse) -> float:
         return 0.0
 
     # Hard early returns for unambiguous failure cases
-    if not response.content.strip():
+    # Empty content with no tool calls = hard failure; tool-only responses are valid
+    if not response.content.strip() and not response.tool_calls:
         logger.warning("evaluator_empty_content")
         return 0.0
 

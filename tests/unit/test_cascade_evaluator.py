@@ -195,6 +195,15 @@ class TestEvaluateResponse:
     def test_empty_response_returns_zero(self, simple_request, empty_response):
         assert evaluate_response(simple_request, empty_response) == 0.0
 
+    def test_empty_content_with_tool_calls_not_zero(self, request_with_tools):
+        from core.cascade.types import ToolCall
+        resp = AgentResponse(
+            content="",
+            tool_calls=[ToolCall(id="1", name="web_search", arguments={"query": "AI"})],
+            model_slug="x",
+        )
+        assert evaluate_response(request_with_tools, resp) > 0.0
+
     def test_score_is_deterministic(self, simple_request, good_response):
         s1 = evaluate_response(simple_request, good_response)
         s2 = evaluate_response(simple_request, good_response)
