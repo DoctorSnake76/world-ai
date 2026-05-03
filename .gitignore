@@ -136,3 +136,18 @@ desktop.ini
 *.tmp
 *.temp
 .cache/
+
+# ── World AI — Données runtime ────────────
+# Volumes Docker montés localement
+volumes/
+# Fichiers WhatsApp-web.py session
+.wwebjs_auth/
+.wwebjs_cache/
+# Fichiers de session Playwright
+playwright-state.json
+# Modèles GGUF (trop lourds pour Git)
+*.gguf
+*.ggml
+# Résultats fine-tuning LoRA
+lora-weights/
+checkpoints/
