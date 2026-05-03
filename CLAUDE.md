@@ -121,14 +121,30 @@ world-ai/
 │   ├── risk_classifier.py       # Classification risque d'une action
 │   └── summary_generator.py    # Génération résumé conséquences
 │
-├── nervous/                     # Système Nerveux (MCP)
-│   ├── servers/                 # MCP Servers
-│   │   ├── filesystem_mcp.py    # Accès fichiers (sandbox strict)
-│   │   ├── web_mcp.py           # Recherche web + fetch
-│   │   ├── email_mcp.py         # Lecture/envoi email
-│   │   ├── calendar_mcp.py      # Calendrier
-│   │   └── browser_mcp.py       # Playwright browser automation
-│   └── gateway.py               # Passerelle MCP centrale
+├── nervous/                     # Système Nerveux — MCP Universel
+│   ├── registry/                # Registre de connecteurs (comme Claude/GPT connectors)
+│   │   ├── registry.py          # Catalogue de tous les MCP disponibles + métadonnées
+│   │   ├── loader.py            # Chargement dynamique d'un MCP depuis le registre
+│   │   └── schemas/             # Schémas JSON des capacités de chaque connecteur
+│   ├── servers/                 # MCP Servers natifs (built-in)
+│   │   ├── filesystem_mcp.py    # Accès fichiers (sandbox /data/user/)
+│   │   ├── web_mcp.py           # Recherche Brave + fetch URL
+│   │   ├── email_mcp.py         # Lecture/envoi email (IMAP/SMTP)
+│   │   ├── calendar_mcp.py      # Calendrier (Google Cal / Outlook / iCal)
+│   │   ├── browser_mcp.py       # Playwright browser automation
+│   │   ├── notion_mcp.py        # Notion API
+│   │   ├── github_mcp.py        # GitHub (issues, PRs, repos)
+│   │   ├── slack_mcp.py         # Slack (lecture + envoi messages)
+│   │   ├── gdrive_mcp.py        # Google Drive (lecture/écriture docs)
+│   │   ├── linear_mcp.py        # Linear (project management)
+│   │   ├── airtable_mcp.py      # Airtable (bases de données no-code)
+│   │   ├── stripe_mcp.py        # Stripe (paiements — lecture seule par défaut)
+│   │   ├── postgres_mcp.py      # PostgreSQL (requêtes SQL sandboxées)
+│   │   └── custom_mcp.py        # Template pour connecteur custom utilisateur
+│   ├── connectors/              # Connecteurs tiers (compatibles MCP standard)
+│   │   ├── connector_base.py    # BaseConnector : interface standard à implémenter
+│   │   └── README.md            # Guide : comment ajouter un connecteur en 10 lignes
+│   └── gateway.py               # Passerelle MCP centrale (routage + sécurité + audit)
 │
 ├── evolution/                   # Auto-Évolution
 │   ├── skill_compiler.py        # Tâche réussie → skill persistant
@@ -136,15 +152,30 @@ world-ai/
 │   └── hope/                    # Architecture HOPE (Nested Learning)
 │       └── memory.py            # Continuum Memory System
 │
-├── interfaces/                  # Interfaces Utilisateur
-│   ├── telegram/
-│   │   ├── bot.py               # Handler principal bot Telegram
-│   │   ├── handlers/            # Handlers par type de message
-│   │   │   ├── text_handler.py
-│   │   │   ├── voice_handler.py
-│   │   │   └── confirmation_handler.py
-│   │   └── keyboards.py         # Claviers inline Telegram
-│   └── web/                     # Interface Web (Next.js via Dify)
+├── interfaces/                  # Gateway Multi-Canal Unifié
+│   ├── Dockerfile               # Image Docker du service gateway (port 8100)
+│   ├── gateway/                 # Point d'entrée central (tous canaux → même agent)
+│   │   ├── gateway.py           # FastAPI app : reçoit tous les canaux, normalise, dispatch
+│   │   ├── message.py           # Type UnifiedMessage : format commun tous canaux
+│   │   ├── router.py            # Route le message normalisé vers l'agent core
+│   │   └── response_formatter.py # Formate la réponse selon le canal d'origine
+│   ├── adapters/                # Un adapter par canal — tous héritent de BaseAdapter
+│   │   ├── base_adapter.py      # Interface abstraite : receive() + send() + send_confirmation()
+│   │   ├── telegram_adapter.py  # Telegram (httpx direct, webhook, boutons inline)
+│   │   ├── whatsapp_adapter.py  # WhatsApp (whatsapp-web.py ou Twilio)
+│   │   ├── imessage_adapter.py  # iMessage (AppleScript bridge, macOS local uniquement)
+│   │   ├── discord_adapter.py   # Discord (discord.py v2)
+│   │   ├── slack_adapter.py     # Slack (slack-bolt)
+│   │   ├── email_adapter.py     # Email IMAP/SMTP (aiosmtplib + imaplib)
+│   │   ├── webchat_adapter.py   # Web Chat (WebSocket FastAPI, embeddable widget)
+│   │   ├── voice_adapter.py     # Voix (Whisper STT input + TTS output local)
+│   │   └── api_adapter.py       # REST API publique (intégrations tierces directes)
+│   ├── handlers/                # Handlers partagés tous canaux
+│   │   ├── text_handler.py      # Texte → agent
+│   │   ├── voice_handler.py     # Audio → Whisper → texte → agent
+│   │   ├── file_handler.py      # Fichiers/images reçus → traitement agent
+│   │   └── confirmation_handler.py  # Gates Oui/Non/Modifier (multi-canal)
+│   └── web/                     # Interface Web (Dify + dashboard)
 │       └── README.md            # Configuration Dify pour l'UI
 │
 ├── n8n/                         # Workflows No-Code
@@ -208,7 +239,16 @@ world-ai/
 | Workflows no-code | n8n | 5678 | Crons, webhooks, intégrations |
 | Interface Web UI | Dify | 3000 | Paramétrage, dashboard |
 | Logs structurés | Langfuse (self-hosted) | 3001 | Tracing chaque step agent |
-| Bot Telegram | python-telegram-bot v21 | — | Handler principal |
+| Gateway multi-canal | FastAPI (channel_gateway) | 8100 | Point d'entrée unifié tous canaux |
+| Canal Telegram | python-telegram-bot v21 | — | Adapter Telegram |
+| Canal WhatsApp | whatsapp-web.py ou Twilio | — | Adapter WhatsApp |
+| Canal iMessage | AppleScript bridge (macOS local) | — | Adapter iMessage (macOS uniquement) |
+| Canal Discord | discord.py v2 | — | Adapter Discord |
+| Canal Slack | slack-bolt | — | Adapter Slack |
+| Canal Email | aiosmtplib + imaplib | — | Adapter Email (IMAP/SMTP) |
+| Canal Web Chat | WebSocket (FastAPI) | 8101 | Chat embarquable sur tout site |
+| Canal Voice | Whisper STT + TTS local | — | Adapter voix (OMI / micro) |
+| Canal API REST | FastAPI public | 8102 | Intégration tierce directe |
 
 ### Neuro-Symbolique et Bouclier
 | Composant | Technologie | Notes |
@@ -271,13 +311,32 @@ world-ai/
 - [x] `nervous/gateway.py` : passerelle centrale MCP + HTTP FastAPI (GET /tools, POST /execute)
 - [x] Test : 80 tests unitaires — filesystem (32) + web (27) + gateway (21) — 100%
 
-**Étape 1.5 — Bot Telegram**
-- [ ] `interfaces/telegram/bot.py` : setup bot, handlers de base
-- [ ] `interfaces/telegram/handlers/text_handler.py` : messages texte → agent
-- [ ] `interfaces/telegram/handlers/voice_handler.py` : voice note → Whisper → agent
-- [ ] `interfaces/telegram/handlers/confirmation_handler.py` : boutons Oui/Non/Modifier
-- [ ] `interfaces/telegram/keyboards.py` : claviers inline pour confirmations
-- [ ] Test : envoie un message Telegram → l'agent répond
+**Étape 1.5 — Gateway Multi-Canal + Adapters**
+
+> **Philosophie** : un seul point d'entrée normalisé (`UnifiedMessage`) reçoit tous les canaux.
+> L'agent ne sait pas d'où vient le message — il reçoit toujours le même format.
+> La réponse est reformatée selon le canal d'origine avant envoi.
+> Ajouter un nouveau canal = écrire un seul adapter qui hérite de `BaseAdapter`.
+
+- [x] `interfaces/gateway/message.py` : type `UnifiedMessage` (channel, user_id, content, attachments, reply_to) — 12 tests
+- [x] `interfaces/adapters/base_adapter.py` : classe abstraite `BaseAdapter` (receive, send, send_confirmation) — 9 tests
+- [x] `interfaces/gateway/gateway.py` : FastAPI app port 8100 — reçoit webhooks tous canaux, normalise, dispatch vers core — 14 tests
+- [x] `interfaces/gateway/response_formatter.py` : formate la réponse AgentResponse selon le canal (Telegram = MarkdownV2, Email = HTML, Slack = mrkdwn, Voice = texte brut…) — 13 tests
+- [x] `interfaces/adapters/telegram_adapter.py` : adapter Telegram complet (texte, voix, documents, photos, boutons inline) via httpx direct (sans polling) — 17 tests
+- [ ] `interfaces/adapters/discord_adapter.py` : adapter Discord (slash commands + messages)
+- [ ] `interfaces/adapters/slack_adapter.py` : adapter Slack (bolt, slash commands + messages directs)
+- [ ] `interfaces/adapters/email_adapter.py` : adapter Email (IMAP polling entrant + SMTP sortant)
+- [ ] `interfaces/adapters/whatsapp_adapter.py` : adapter WhatsApp (Twilio ou whatsapp-web.py — stub si non configuré)
+- [ ] `interfaces/adapters/webchat_adapter.py` : adapter Web Chat (WebSocket port 8101 + widget JS embeddable)
+- [ ] `interfaces/adapters/voice_adapter.py` : adapter Voix (Whisper STT → agent → TTS pyttsx3/Coqui)
+- [ ] `interfaces/adapters/api_adapter.py` : adapter REST public (port 8102 — pour intégrations tierces)
+- [ ] `interfaces/adapters/imessage_adapter.py` : adapter iMessage (AppleScript bridge — macOS local uniquement, stub sinon)
+- [ ] `interfaces/handlers/text_handler.py` : handler texte partagé tous canaux
+- [ ] `interfaces/handlers/voice_handler.py` : audio → Whisper → texte → agent
+- [ ] `interfaces/handlers/file_handler.py` : fichiers/images → traitement agent
+- [ ] `interfaces/handlers/confirmation_handler.py` : gates Oui/Non/Modifier adaptatifs selon canal
+- [ ] Tests : gateway normalise correctement chaque canal, adapters envoient et reçoivent (partiel : Telegram + gateway ✅)
+- [ ] Test E2E : envoie un message Telegram → l'agent répond ; même test via Web Chat
 
 **Étape 1.6 — Interface Web (Dify)**
 - [ ] Configuration Dify dans docker-compose
@@ -365,20 +424,55 @@ world-ai/
 
 ### Variables d'environnement (préfixe WORLDAI_)
 ```
+# Core LLM
 WORLDAI_OPENROUTER_API_KEY=
-WORLDAI_TELEGRAM_BOT_TOKEN=
 WORLDAI_ANTHROPIC_API_KEY=
-WORLDAI_MEMGRAPH_URI=bolt://memgraph:7687
-WORLDAI_QDRANT_URL=http://qdrant:6333
-WORLDAI_REDIS_URL=redis://redis:6379
-WORLDAI_LANGFUSE_SECRET_KEY=
-WORLDAI_LANGFUSE_PUBLIC_KEY=
 WORLDAI_LLM_BUDGET_MODEL=deepseek/deepseek-chat
 WORLDAI_LLM_MID_MODEL=meta-llama/llama-4-scout
 WORLDAI_LLM_FRONTIER_MODEL=anthropic/claude-opus-4-6
 WORLDAI_CONFIDENCE_THRESHOLD=0.75
 WORLDAI_SIMULATION_THRESHOLD=0.40
+WORLDAI_XLAM_LOCAL_URL=http://localhost:8080
+
+# Infrastructure
+WORLDAI_MEMGRAPH_URI=bolt://memgraph:7687
+WORLDAI_QDRANT_URL=http://qdrant:6333
+WORLDAI_REDIS_URL=redis://redis:6379
+WORLDAI_LANGFUSE_SECRET_KEY=
+WORLDAI_LANGFUSE_PUBLIC_KEY=
 WORLDAI_ENV=production
+
+# Canaux de communication
+WORLDAI_TELEGRAM_BOT_TOKEN=
+WORLDAI_DISCORD_BOT_TOKEN=
+WORLDAI_DISCORD_GUILD_ID=
+WORLDAI_SLACK_BOT_TOKEN=
+WORLDAI_SLACK_SIGNING_SECRET=
+WORLDAI_SLACK_APP_TOKEN=
+WORLDAI_WHATSAPP_MODE=twilio          # twilio | web (whatsapp-web.py)
+WORLDAI_TWILIO_ACCOUNT_SID=
+WORLDAI_TWILIO_AUTH_TOKEN=
+WORLDAI_TWILIO_WHATSAPP_NUMBER=
+WORLDAI_EMAIL_IMAP_HOST=
+WORLDAI_EMAIL_IMAP_PORT=993
+WORLDAI_EMAIL_SMTP_HOST=
+WORLDAI_EMAIL_SMTP_PORT=587
+WORLDAI_EMAIL_ADDRESS=
+WORLDAI_EMAIL_PASSWORD=
+WORLDAI_IMESSAGE_ENABLED=false        # true uniquement si macOS local
+WORLDAI_WEBCHAT_SECRET=               # JWT secret pour le widget web
+WORLDAI_API_PUBLIC_KEY=               # Clé API pour intégrations REST tierces
+
+# MCP Connecteurs (activer ceux dont tu as les clés)
+WORLDAI_MCP_NOTION_TOKEN=
+WORLDAI_MCP_GITHUB_TOKEN=
+WORLDAI_MCP_GDRIVE_CREDENTIALS=       # Path vers JSON OAuth Google
+WORLDAI_MCP_LINEAR_API_KEY=
+WORLDAI_MCP_AIRTABLE_API_KEY=
+WORLDAI_MCP_STRIPE_SECRET_KEY=        # Toujours en lecture seule !
+WORLDAI_MCP_POSTGRES_URL=
+WORLDAI_MCP_BRAVE_API_KEY=
+WORLDAI_MCP_ENABLED_SERVERS=filesystem,web,email,calendar,browser  # Serveurs actifs
 ```
 
 ### Gestion des erreurs
@@ -470,14 +564,124 @@ ACTION_RISK_LEVELS = {
 
 ---
 
-## 💬 Format des Messages Telegram
+## 📡 Architecture Gateway Multi-Canal
 
 ```
-# Message standard
+Canal entrant (Telegram / Discord / Email / WhatsApp / iMessage / Voice / Web / API)
+        │
+        ▼
+┌───────────────────────────────────────────────────────┐
+│  interfaces/gateway/gateway.py — FastAPI port 8100    │
+│  Reçoit webhook/événement brut de chaque canal        │
+└───────────────────────┬───────────────────────────────┘
+                        │  normalise via adapter
+                        ▼
+              UnifiedMessage {
+                channel: "telegram" | "discord" | "email" | ...
+                user_id: str
+                content: str
+                attachments: list
+                reply_to: str | None
+              }
+                        │
+                        ▼
+┌───────────────────────────────────────────────────────┐
+│  core/cascade/agent.py — Agent principal              │
+│  Ne connaît PAS le canal — reçoit toujours UnifiedMsg │
+└───────────────────────┬───────────────────────────────┘
+                        │  AgentResponse
+                        ▼
+┌───────────────────────────────────────────────────────┐
+│  interfaces/gateway/response_formatter.py             │
+│  Formate selon canal d'origine :                      │
+│  Telegram → Markdown + boutons inline                 │
+│  Email    → HTML + texte brut                         │
+│  Discord  → Embeds + slash command response           │
+│  Slack    → Block Kit                                 │
+│  Web Chat → JSON WebSocket                            │
+└───────────────────────┬───────────────────────────────┘
+                        │
+                        ▼
+              Réponse envoyée au bon canal
+```
+
+### Principe d'extension : ajouter un canal en 3 étapes
+1. Crée `interfaces/adapters/mon_canal_adapter.py` qui hérite de `BaseAdapter`
+2. Implémente `receive()` → retourne `UnifiedMessage`, `send()` → envoie la réponse formatée
+3. Enregistre l'adapter dans `gateway.py` — c'est tout
+
+---
+
+## 🔌 Architecture MCP Universelle (Connecteur Registry)
+
+Inspiré des connecteurs Claude.ai et des plugins GPT, mais **souverain et self-hosted**.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  nervous/registry/registry.py — Registre MCP           │
+│  Catalogue de tous les connecteurs disponibles          │
+│  Chaque connecteur = { name, description, tools[], auth }│
+└────────────────────────┬────────────────────────────────┘
+                         │  discover_tools()
+                         ▼
+            L'agent consulte le registre
+            "Quels outils ai-je disponibles ?"
+            → Liste des tools actifs (selon WORLDAI_MCP_ENABLED_SERVERS)
+                         │
+                         │  execute_tool(name, params)
+                         ▼
+┌─────────────────────────────────────────────────────────┐
+│  nervous/gateway.py — Passerelle MCP                    │
+│  Route vers le bon MCP server + audit log + sandbox     │
+└────────────────────────┬────────────────────────────────┘
+                         │
+          ┌──────────────┼──────────────┐
+          ▼              ▼              ▼
+    filesystem_mcp   notion_mcp    github_mcp  ...
+    (stdio sandbox)  (HTTP/OAuth)  (HTTP/token)
+```
+
+### MCP activés par défaut (Phase 1)
+| Connecteur | Mode transport | Auth |
+|---|---|---|
+| filesystem | stdio (sandbox /data/user/) | Aucune — local |
+| web (Brave) | HTTP | API Key |
+| email | stdio | IMAP/SMTP credentials |
+| calendar | HTTP | OAuth |
+| browser | stdio (Playwright) | Aucune — local |
+
+### MCP activables sur demande (Phase 1 → 2)
+Notion, GitHub, Google Drive, Slack, Linear, Airtable, Stripe (read-only), PostgreSQL, custom
+
+### Ajouter un connecteur custom
+```python
+# nervous/connectors/mon_service_connector.py
+from nervous.connectors.connector_base import BaseConnector
+
+class MonServiceConnector(BaseConnector):
+    name = "mon_service"
+    description = "Connecteur vers Mon Service — lecture et écriture"
+    tools = [
+        {"name": "get_data", "description": "Récupère des données"},
+        {"name": "send_data", "description": "Envoie des données"},
+    ]
+    async def execute(self, tool_name: str, params: dict) -> dict:
+        ...  # Implémente ici
+```
+→ Enregistre dans `registry.py` → disponible immédiatement pour l'agent
+
+---
+
+## 💬 Format des Messages — Multi-Canal
+
+Le `response_formatter.py` adapte ce format selon le canal. Contenu sémantique identique partout.
+
+```
+# Réponse standard (tous canaux)
 🤖 [Résumé de ce que l'IA a fait]
 ─────────────────────
 📊 Modèle : DeepSeek V3 | Coût : ~0.001€
-⏱️ Temps : 1.2s | Confiance : 87%
+⏱️ Temps : 1.2s | Confiance : 87% | Canal : Telegram
 
 # Message avec confirmation requise
 ⚠️ ACTION REQUISE
@@ -560,10 +764,18 @@ Pour chaque interaction, logger :
 | Coolify Docs | https://coolify.io/docs |
 | Hetzner Cloud | https://www.hetzner.com/cloud |
 | python-telegram-bot | https://docs.python-telegram-bot.org |
+| discord.py | https://discordpy.readthedocs.io |
+| slack-bolt Python | https://slack.dev/bolt-python |
+| whatsapp-web.py | https://github.com/mukulhase/WebWhatsapp-Wrapper |
+| Twilio WhatsApp | https://www.twilio.com/docs/whatsapp |
+| aiosmtplib | https://aiosmtplib.readthedocs.io |
+| Playwright Python | https://playwright.dev/python |
 | Langfuse | https://langfuse.com/docs |
 | OMI Open Source | https://github.com/BasedHardware/omi |
+| MCP Protocol Spec | https://modelcontextprotocol.io |
+| MCP Servers officiels | https://github.com/modelcontextprotocol/servers |
 
 ---
 
-*Dernière mise à jour : Phase 01 — Étape 1.4 complétée (MCP Servers de base — 150 tests, 100%)*
+*Dernière mise à jour : Phase 01 — Étape 1.5 en cours (5/19 items) · Fondations gateway + Telegram ✅ · Adapters restants + handlers à faire*
 *Maintenu par : Alexis Druaux + Claude Code (Sonnet 4.6)*
