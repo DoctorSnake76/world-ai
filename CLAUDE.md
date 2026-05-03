@@ -266,10 +266,10 @@ world-ai/
 - [x] Test : 41 tests unitaires — évaluateur + pipeline CascadeAgent (100%)
 
 **Étape 1.4 — MCP Servers de base**
-- [ ] `nervous/servers/filesystem_mcp.py` : lecture/écriture fichiers (sandbox /data/user/)
-- [ ] `nervous/servers/web_mcp.py` : recherche Brave + fetch URL
-- [ ] `nervous/gateway.py` : passerelle centrale MCP
-- [ ] Test : agent lit un fichier via MCP, agent fait une recherche web
+- [x] `nervous/servers/filesystem_mcp.py` : lecture/écriture fichiers (sandbox /data/user/)
+- [x] `nervous/servers/web_mcp.py` : recherche Brave + fetch URL
+- [x] `nervous/gateway.py` : passerelle centrale MCP + HTTP FastAPI (GET /tools, POST /execute)
+- [x] Test : 80 tests unitaires — filesystem (32) + web (27) + gateway (21) — 100%
 
 **Étape 1.5 — Bot Telegram**
 - [ ] `interfaces/telegram/bot.py` : setup bot, handlers de base
@@ -565,5 +565,5 @@ Pour chaque interaction, logger :
 
 ---
 
-*Dernière mise à jour : Phase 01 — Étape 1.3 complétée (Agent Cascade SAS — 70 tests, 100%)*
+*Dernière mise à jour : Phase 01 — Étape 1.4 complétée (MCP Servers de base — 150 tests, 100%)*
 *Maintenu par : Alexis Druaux + Claude Code (Sonnet 4.6)*
