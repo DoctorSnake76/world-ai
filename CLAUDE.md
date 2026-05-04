@@ -1,4 +1,4 @@
-# CLAUDE.md — World AI · Document Maître
+# CLAUDE.md — World AI · Document Maître AGI
 > **CE FICHIER EST LA SOURCE DE VÉRITÉ ABSOLUE DU PROJET.**
 > Claude Code : lis ce fichier intégralement avant chaque session. Ne suppose rien qui ne soit pas ici.
 > Maintenu à jour après chaque phase complétée.
@@ -7,198 +7,244 @@
 
 ## 🧭 Vision du Projet
 
-**World AI** est un méta-orchestrateur d'IA personnel et professionnel, open-source, souverain et auto-évolutif.
+**World AI** est un méta-orchestrateur d'IA personnel et professionnel, open-source, souverain et auto-évolutif. Il s'affranchit du paradigme "Prompt → Réponse" pour implémenter un **organisme cognitif bio-inspiré** : mémoire causale vivante, conscience temporelle, auto-réparation, preuve formelle des actions, et évolution nocturne autonome.
 
-Il ne remplace pas un LLM — il rend **n'importe quel LLM 10x plus capable, fiable et personnalisé** en ajoutant :
-- Une mémoire causale vivante de l'utilisateur (graphe d'ontologie)
-- Une logique déterministe anti-hallucination
-- Une simulation des conséquences avant chaque action critique
-- Une captation continue de la vie de l'utilisateur (voix, lectures, décisions)
-- Une auto-évolution réelle via fine-tuning LoRA et compilation de skills
+Il rend n'importe quel LLM 10x plus puissant en ajoutant :
+- **Un Réflexe neuronal** : Cache sémantique (Qdrant > 98%) — zéro latence pour le connu
+- **Une Âme causale** : Spreading Activation + Intent Tracking — mémoire qui pense et comprend le POURQUOI
+- **Un Cerveau fractal** : Agent Cascade SAS→MAS + Consensus Multi-Modèle + Analogie Cross-Domaine
+- **Un Bouclier formel** : Chain-of-Code + Red-Teaming + SMT Solvers (Phase 7) — zéro erreur non prouvée
+- **Un Temps liquide** : Conscience asynchrone — l'agent ne bloque jamais
+- **Un Système nerveux auto-plastique** : Self-Healing + Tool Synthesis — zéro maintenance humaine
+- **Un Métabolisme nocturne** : Ebbinghaus Decay + Dynamic Prompt Library + DSPy — évolution continue
+- **Une Empathie cognitive** : Theory of Mind + Persona Cloner + Autonomie proactive selon charge user
 
-**Cible** : particuliers et professionnels qui veulent une IA qui les connaît, agit à leur place en toute sécurité, et s'améliore avec le temps.
-
-**Budget** : ≤ 25 €/mois en Phase 1 (VPS Hetzner CX33 ~7€ + API LLM ~15€ + divers ~3€).
-
+**Cible** : particuliers et professionnels qui veulent une IA qui les connaît, agit à leur place en toute sécurité, s'auto-répare, et s'améliore avec le temps.
+**Budget** : ≤ 25 €/mois Phase 1 (Hetzner CX33 ~7€ + API LLM ~15€ + divers ~3€).
 **Licence** : Apache 2.0 — totalement open source.
-
 **Repo GitHub** : `https://github.com/[USERNAME]/world-ai`
 
 ---
 
-## 🏗️ Architecture — Les 7 Couches
+## 🏗️ Architecture AGI — Les 9 Couches
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  COUCHE 0 — OMI LAYER (Soul Collector)                      │
-│  Captation continue : voix, lectures, actions, contexte     │
-│  Stack : OMI app + Whisper STT + NLP extraction             │
+│  COUCHE 0 — PERCEPTION MULTI-CANAL (Liquid Time Gateway)    │
+│  Entrée unifiée tous canaux. Horloge interne. Pings async.  │
+│  Stack : FastAPI gateway + UnifiedMessage + liquid_time.py  │
 ├─────────────────────────────────────────────────────────────┤
-│  COUCHE 1 — ÂME NUMÉRIQUE (Jumeau Cognitif)                 │
-│  Knowledge Graph causal de l'utilisateur                    │
-│  Stack : Memgraph + Qdrant + ontologie personnelle          │
+│  COUCHE 1 — LE RÉFLEXE (Semantic Cache)                     │
+│  Requête → FastEmbed → Qdrant sim > 0.98 → Réponse directe  │
+│  Stack : FastEmbed + Qdrant + cache_manager.py              │
 ├─────────────────────────────────────────────────────────────┤
-│  COUCHE 2 — CERVEAU EXÉCUTIF (Agent Cascade)                │
-│  SAS en premier → MAS si confiance < seuil                  │
-│  Stack : xLAM-2 7B + Routeur LLM tiéré + OpenRouter        │
+│  COUCHE 2 — L'ÂME (Spreading Activation Graph)             │
+│  Graphe causal Memgraph. Onde d'activation. Dérive détectée │
+│  Stack : Memgraph Cypher + spreading_activation.py          │
 ├─────────────────────────────────────────────────────────────┤
-│  COUCHE 3 — BOUCLIER LOGIQUE (Gardien Déterministe)         │
-│  Vérification règles avant chaque action                    │
-│  Stack : Synalinks + Pydantic v2 + Memgraph SPARQL          │
+│  COUCHE 3 — CERVEAU EXÉCUTIF (Agent Cascade + Bidding)      │
+│  SAS → MAS conditionnel. Compute Bidding ROI (Phase 5)      │
+│  Stack : xLAM-2 + OpenRouter + compute_bidding.py           │
 ├─────────────────────────────────────────────────────────────┤
-│  COUCHE 4 — SIMULATEUR DE DÉCISION (World Model)            │
-│  Simulation conséquences → résumé → confirmation user       │
-│  Stack : LingBot-World-Fast + Decision Rehearsal Loop       │
+│  COUCHE 4 — BOUCLIER FORMEL (Chain-of-Code + Red-Team)      │
+│  Génère assertion Python. Exécute sandbox. Red-team local.  │
+│  Stack : chain_of_code.py + DinD sandbox + Qwen 1.5B local  │
 ├─────────────────────────────────────────────────────────────┤
-│  COUCHE 5 — SYSTÈME NERVEUX (MCP Servers)                   │
-│  Exécution réelle après validation                          │
-│  Stack : MCP Servers locaux (stdio + HTTP/TLS)              │
+│  COUCHE 5 — TEST-TIME COMPUTE (Thinking Budget)             │
+│  Budget tokens réflexion caché. Backtracking. MCTS.         │
+│  Stack : thinking_budget.py + self_correction.py + mcts.py  │
 ├─────────────────────────────────────────────────────────────┤
-│  COUCHE 6 — AUTO-ÉVOLUTION (Le Phénix)                      │
-│  Fine-tuning LoRA + Skill Compiler + HOPE memory           │
-│  Stack : LoRA/QLoRA + DSPy + HOPE (PyTorch)                 │
+│  COUCHE 6 — SYSTÈME NERVEUX AUTO-PLASTIQUE (MCP + Healing)  │
+│  Exécution MCP. Auto-réparation si erreur. Patch à chaud.   │
+│  Stack : MCP servers + debugger.py + patch_generator.py     │
+├─────────────────────────────────────────────────────────────┤
+│  COUCHE 7 — INFÉRENCE ACTIVE (Curiosité Intrinsèque)        │
+│  Démon background. Minimise surprise. Teste hypothèses web. │
+│  Stack : active_inference.py + hypothesis_tester.py         │
+├─────────────────────────────────────────────────────────────┤
+│  COUCHE 8 — SOMMEIL CONSTITUTIONNEL (Métabolisme Nocturne)  │
+│  Ebbinghaus Decay. Synthetic DPO. DSPy prompt optimization. │
+│  Stack : ebbinghaus_decay.py + synthetic_dpo.py + dspy      │
 └─────────────────────────────────────────────────────────────┘
-         ⟳ Boucle continue : Couche 6 → alimente → Couches 1,2,3
+         ⟳ Boucle asynchrone : Couche 8 (nuit) + Couche 7 (background)
+         ⟳ Boucle continue : succès → Couche 2 (mémoire) → Couche 1 (cache)
 ```
 
-### Principes fondamentaux à ne JAMAIS violer
+### Principes fondamentaux — Ne JAMAIS violer
 
-1. **Sécurité d'abord** : container hardening, read-only root FS, namespace isolation, secrets en vault, pre-execution scanner sur toute commande shell.
-2. **SAS avant MAS** : traiter toute requête par agent unique d'abord. MAS uniquement si `confidence_score < 0.75`.
-3. **Simulation avant action critique** : toute action irréversible (suppression, envoi email, transaction, écriture fichier hors sandbox) déclenche obligatoirement la boucle de simulation + confirmation utilisateur.
-4. **MCP partout** : tous les outils exposés via MCP servers — portabilité garantie, audit complet.
-5. **Secrets jamais en plaintext** : utiliser Infisical (self-hosted) ou variables d'environnement Docker Secrets.
-6. **Aucun credential dans le repo Git** : `.gitignore` strict, `.env.example` uniquement.
+1. **Preuve avant action** : Toute action irréversible (écrire, supprimer, envoyer) est prouvée par un test Python généré et exécuté en sandbox (Couche 4) avant validation.
+2. **Asynchronisme absolu** : L'agent ne bloque jamais l'utilisateur. Si une tâche dure > 10s, Liquid Time envoie un update automatique toutes les 15s.
+3. **Self-Healing > Exception** : Une erreur MCP ne s'expose jamais à l'utilisateur. Elle déclenche la boucle de réparation automatique (Couche 6).
+4. **Cache avant LLM** : Toute requête passe d'abord par le Semantic Cache (Couche 1). Appel LLM uniquement si similarité < 0.98.
+5. **SAS avant MAS** : Agent unique en premier. MAS uniquement si `confidence_score < 0.75`. Compute Bidding uniquement si `roi_score > 0.8` ET validation humaine (Phase 5).
+6. **Secrets jamais en plaintext** : Infisical vault ou Docker Secrets. Zéro credential dans le repo Git.
+7. **Modulaire < 600 lignes** : Aucun fichier Python ne dépasse 600 lignes. Découpe en modules si nécessaire.
+8. **Consensus avant action critique** : Pour toute action irréversible à haut impact, 3 modèles différents (DeepSeek + Llama + Claude) doivent converger. Si désaccord → blocage automatique + notification user.
+9. **Intent Tracking obligatoire** : Le graphe ne stocke jamais un fait isolé. Tout nœud de connaissance inclut un arc causal `MOTIVATES` vers un objectif utilisateur. Stocker le POURQUOI, pas juste le QUOI.
 
 ---
 
-## 📁 Structure du Repo
+## 📁 Structure Exhaustive du Repo
 
 ```
 world-ai/
-├── CLAUDE.md                    # CE FICHIER — source de vérité
-├── ARCHITECTURE.md              # Détail technique de chaque couche
-├── ROADMAP.md                   # Phases, milestones, statuts
-├── CHANGELOG.md                 # Historique des changements
-├── LICENSE                      # Apache 2.0
-├── README.md                    # Documentation publique projet
-├── .gitignore                   # Node, Python, .env, secrets
-├── .env.example                 # Template variables d'env (sans valeurs)
+├── CLAUDE.md                          # SOURCE DE VÉRITÉ — ce fichier
+├── ARCHITECTURE.md                    # Détail technique de chaque couche
+├── ROADMAP.md                         # Phases et milestones
+├── CHANGELOG.md                       # Historique sessions
+├── LICENSE                            # Apache 2.0
+├── README.md                          # Documentation publique
+├── .gitignore                         # Python, Node, .env, secrets
+├── .env.example                       # Template sans valeurs
+├── docker-compose.yml                 # Stack complète 1 commande
+├── docker-compose.dev.yml             # Override dev local
 │
-├── docker-compose.yml           # Stack complète — démarrage en 1 commande
-├── docker-compose.dev.yml       # Override pour développement local
+├── core/                              # Moteur Central (Couches 1, 3, 5)
+│   ├── cache/                         # Couche 1 — Réflexe Sémantique
+│   │   ├── semantic_cache.py          # FastEmbed + Qdrant similarity check
+│   │   └── cache_manager.py          # Invalidation TTL, stats
+│   ├── router/                        # Couche 3 — Routage & Économie
+│   │   ├── router.py                  # Logique routing (score → modèle)
+│   │   ├── confidence.py              # Calcul entropie/complexité/domaine
+│   │   ├── models.py                  # Slugs OpenRouter par tier
+│   │   └── compute_bidding.py        # API RunPod — location GPU (Phase 5)
+│   ├── analogie/                      # Couche 3 — Raisonnement Cross-Domaine
+│   │   ├── blender.py                 # Recherche Qdrant forcée dans domaines NON-LIÉS
+│   │   └── domain_mapper.py          # Mapping domaines : biologie, physique, urbanisme…
+│   └── reasoning/                     # Couche 5 — Test-Time Compute
+│       ├── thinking_budget.py         # Allocation tokens réflexion cachés
+│       ├── self_correction.py         # Boucle backtracking interne
+│       └── mcts.py                    # Monte Carlo Tree Search
 │
-├── core/                        # Moteur central
-│   ├── router/                  # Routage LLM tiéré
-│   │   ├── router.py            # Logique de routing (budget → frontier)
-│   │   ├── confidence.py        # Calcul score de confiance
-│   │   └── models.py            # Définitions des modèles disponibles
-│   └── cascade/                 # Agent Cascade (SAS → MAS)
-│       ├── agent.py             # Agent principal SAS
-│       ├── evaluator.py         # Évaluateur de difficulté
-│       └── dispatcher.py        # Dispatch vers MAS si nécessaire
+├── soul/                              # Couche 2 — Âme & Graphe Causal
+│   ├── graph/                         # Memgraph
+│   │   ├── spreading_activation.py   # Onde activation (spanningTree Cypher)
+│   │   ├── queries.py                 # CRUD Knowledge Graph causal
+│   │   ├── schema.cypher              # Schéma ontologique utilisateur
+│   │   └── concept_drift.py          # Détection contradictions/mise à jour
+│   ├── vectors/                       # Qdrant
+│   │   └── collections.py            # Collections : cache, mémoire, skills
+│   └── profile/                       # Profil utilisateur
+│       ├── extractor.py               # Extraction patterns conversations
+│       ├── updater.py                 # Mise à jour graphe post-interaction
+│       ├── cognitive_load.py         # Charge cognitive → seuil autonomie proactive
+│       └── intent_tracker.py         # Modélise objectifs cachés derrière chaque demande
 │
-├── soul/                        # Âme Numérique
-│   ├── graph/                   # Memgraph queries et schemas
-│   │   ├── schema.cypher        # Schéma ontologique utilisateur
-│   │   └── queries.py           # CRUD Knowledge Graph
-│   ├── vectors/                 # Qdrant collections
-│   │   └── collections.py       # Définition et gestion collections
-│   └── profile/                 # Profil utilisateur
-│       ├── extractor.py         # Extraction patterns depuis conversations
-│       └── updater.py           # Mise à jour automatique du profil
+│   ── theory_of_mind/                 # Couche 2 — Simulateur Cognitif (Empathie)
+│       ├── persona_cloner.py         # Clone modèle mental d'un interlocuteur externe
+│       └── autonomy_gate.py          # Si cognitive_load > seuil → décision autonome minor
 │
-├── shield/                      # Bouclier Logique
-│   ├── synalinks_config.py      # Configuration Synalinks
-│   ├── rules_engine.py          # Moteur de règles déterministes
-│   └── schemas/                 # Schémas Pydantic par domaine
+├── shield/                            # Couche 4 — Bouclier Formel
+│   ├── verifier/                      # Chain-of-Code + Consensus Multi-Modèle
+│   │   ├── chain_of_code.py          # Génère test Python pré-action critique
+│   │   ├── formal_eval.py            # Exécute le test en sandbox DinD
+│   │   └── multi_model_consensus.py  # 3 LLMs votent sur action critique (unanimité requise)
+│   ├── adversary/                     # Red-Teaming local
+│   │   ├── evaluator.py              # LLM 1B inspecte plan d'action (actions critical)
+│   │   └── rules_engine.py           # Synalinks + Pydantic v2
+│   └── schemas/                       # Schémas Pydantic par domaine
 │       ├── email_action.py
 │       ├── file_action.py
 │       └── calendar_action.py
 │
-├── simulation/                  # Simulateur de Décision
-│   ├── rehearsal.py             # Boucle de répétition de décision
-│   ├── risk_classifier.py       # Classification risque d'une action
-│   └── summary_generator.py    # Génération résumé conséquences
+├── simulation/                        # Simulateur de Décision (Couche entre 4 et 6)
+│   ├── rehearsal.py                   # Boucle répétition décision pré-exécution
+│   ├── risk_classifier.py             # Classification: safe / risky / critical
+│   └── summary_generator.py          # Résumé conséquences → confirmation user
 │
-├── nervous/                     # Système Nerveux — MCP Universel
-│   ├── registry/                # Registre de connecteurs (comme Claude/GPT connectors)
-│   │   ├── registry.py          # Catalogue de tous les MCP disponibles + métadonnées
-│   │   ├── loader.py            # Chargement dynamique d'un MCP depuis le registre
-│   │   └── schemas/             # Schémas JSON des capacités de chaque connecteur
-│   ├── servers/                 # MCP Servers natifs (built-in)
-│   │   ├── filesystem_mcp.py    # Accès fichiers (sandbox /data/user/)
-│   │   ├── web_mcp.py           # Recherche Brave + fetch URL
-│   │   ├── email_mcp.py         # Lecture/envoi email (IMAP/SMTP)
-│   │   ├── calendar_mcp.py      # Calendrier (Google Cal / Outlook / iCal)
-│   │   ├── browser_mcp.py       # Playwright browser automation
-│   │   ├── notion_mcp.py        # Notion API
-│   │   ├── github_mcp.py        # GitHub (issues, PRs, repos)
-│   │   ├── slack_mcp.py         # Slack (lecture + envoi messages)
-│   │   ├── gdrive_mcp.py        # Google Drive (lecture/écriture docs)
-│   │   ├── linear_mcp.py        # Linear (project management)
-│   │   ├── airtable_mcp.py      # Airtable (bases de données no-code)
-│   │   ├── stripe_mcp.py        # Stripe (paiements — lecture seule par défaut)
-│   │   ├── postgres_mcp.py      # PostgreSQL (requêtes SQL sandboxées)
-│   │   └── custom_mcp.py        # Template pour connecteur custom utilisateur
-│   ├── connectors/              # Connecteurs tiers (compatibles MCP standard)
-│   │   ├── connector_base.py    # BaseConnector : interface standard à implémenter
-│   │   └── README.md            # Guide : comment ajouter un connecteur en 10 lignes
-│   └── gateway.py               # Passerelle MCP centrale (routage + sécurité + audit)
+├── nervous/                           # Couche 6 — Système Nerveux Auto-Plastique
+│   ├── registry/                      # Registre MCP (catalogue connecteurs)
+│   │   ├── registry.py               # Liste tous MCP + métadonnées + auth
+│   │   ├── loader.py                  # Chargement dynamique MCP depuis registre
+│   │   └── schemas/                   # Schémas JSON capacités par connecteur
+│   ├── servers/                       # MCP Servers natifs (built-in)
+│   │   ├── filesystem_mcp.py         # Fichiers (sandbox /data/user/)
+│   │   ├── web_mcp.py                 # Brave search + fetch URL
+│   │   ├── email_mcp.py              # IMAP/SMTP
+│   │   ├── calendar_mcp.py           # Google Cal / Outlook / iCal
+│   │   ├── browser_mcp.py            # Playwright automation
+│   │   ├── notion_mcp.py             # Notion API
+│   │   ├── github_mcp.py             # GitHub (issues, PRs)
+│   │   ├── slack_mcp.py              # Slack (messages)
+│   │   ├── gdrive_mcp.py             # Google Drive
+│   │   ├── linear_mcp.py             # Linear PM
+│   │   ├── airtable_mcp.py           # Airtable
+│   │   ├── stripe_mcp.py             # Stripe (READ-ONLY toujours)
+│   │   ├── postgres_mcp.py           # PostgreSQL (sandboxé)
+│   │   └── custom_mcp.py             # Template connecteur custom
+│   ├── connectors/                    # Connecteurs tiers standard
+│   │   ├── connector_base.py         # BaseConnector : interface à implémenter
+│   │   └── README.md                 # Guide ajout connecteur en 10 lignes
+│   ├── healing/                       # Self-Healing Auto-Réparation
+│   │   ├── debugger.py               # Try/Catch global → déclenche healing
+│   │   ├── patch_generator.py        # LLM écrit patch Python depuis doc web
+│   │   └── dind_sandbox.py           # Docker-in-Docker testing du patch
+│   ├── synthesis/                     # Synthèse de NOUVEAUX outils MCP
+│   │   ├── tool_synthesizer.py       # LLM génère un connecteur MCP entier de zéro
+│   │   └── tool_validator.py         # Valide et teste le nouvel outil avant injection
+│   └── gateway.py                    # Passerelle MCP centrale (routage + audit)
 │
-├── evolution/                   # Auto-Évolution
-│   ├── skill_compiler.py        # Tâche réussie → skill persistant
-│   ├── lora_trainer.py          # Interface RunPod pour fine-tuning
-│   └── hope/                    # Architecture HOPE (Nested Learning)
-│       └── memory.py            # Continuum Memory System
+├── curiosity/                         # Couche 7 — Inférence Active
+│   ├── active_inference.py           # Démon background : cherche surprises
+│   └── hypothesis_tester.py          # Tests web autonomes des hypothèses
 │
-├── interfaces/                  # Gateway Multi-Canal Unifié
-│   ├── Dockerfile               # Image Docker du service gateway (port 8100)
-│   ├── gateway/                 # Point d'entrée central (tous canaux → même agent)
-│   │   ├── gateway.py           # FastAPI app : reçoit tous les canaux, normalise, dispatch
-│   │   ├── message.py           # Type UnifiedMessage : format commun tous canaux
-│   │   ├── router.py            # Route le message normalisé vers l'agent core
-│   │   └── response_formatter.py # Formate la réponse selon le canal d'origine
-│   ├── adapters/                # Un adapter par canal — tous héritent de BaseAdapter
-│   │   ├── base_adapter.py      # Interface abstraite : receive() + send() + send_confirmation()
-│   │   ├── telegram_adapter.py  # Telegram (httpx direct, webhook, boutons inline)
-│   │   ├── whatsapp_adapter.py  # WhatsApp (whatsapp-web.py ou Twilio)
-│   │   ├── imessage_adapter.py  # iMessage (AppleScript bridge, macOS local uniquement)
-│   │   ├── discord_adapter.py   # Discord (discord.py v2)
-│   │   ├── slack_adapter.py     # Slack (slack-bolt)
-│   │   ├── email_adapter.py     # Email IMAP/SMTP (aiosmtplib + imaplib)
-│   │   ├── webchat_adapter.py   # Web Chat (WebSocket FastAPI, embeddable widget)
-│   │   ├── voice_adapter.py     # Voix (Whisper STT input + TTS output local)
-│   │   └── api_adapter.py       # REST API publique (intégrations tierces directes)
-│   ├── handlers/                # Handlers partagés tous canaux
-│   │   ├── text_handler.py      # Texte → agent
-│   │   ├── voice_handler.py     # Audio → Whisper → texte → agent
-│   │   ├── file_handler.py      # Fichiers/images reçus → traitement agent
-│   │   └── confirmation_handler.py  # Gates Oui/Non/Modifier (multi-canal)
-│   └── web/                     # Interface Web (Dify + dashboard)
-│       └── README.md            # Configuration Dify pour l'UI
+├── evolution/                         # Couche 8 — Sommeil & Évolution
+│   ├── sleep/
+│   │   ├── ebbinghaus_decay.py       # Décadence mémoires non-consultées
+│   │   ├── synthetic_dpo.py          # Self-play : génère cas difficiles et se corrige
+│   │   ├── dspy_optimizer.py         # Auto-rewrite prompts optimaux
+│   │   └── prompt_library.py         # Dynamic Prompt Library — archive prompts gagnants
+│   └── compiler/                      # Skill Compiler
+│       ├── skill_compiler.py          # Tâche réussie → skill persistant
+│       └── lora_trainer.py           # Interface RunPod LoRA fine-tuning
 │
-├── n8n/                         # Workflows No-Code
-│   ├── exports/                 # Workflows n8n exportés en JSON
+├── interfaces/                        # Couche 0 — Gateway Multi-Canal
+│   ├── gateway/
+│   │   ├── gateway.py                # FastAPI port 8100 — point d'entrée unifié
+│   │   ├── message.py                # Type UnifiedMessage (format commun)
+│   │   ├── liquid_time.py            # Pings async toutes les 15s si tâche longue
+│   │   └── response_formatter.py    # Formate réponse selon canal d'origine
+│   ├── adapters/                      # Un adapter par canal
+│   │   ├── base_adapter.py           # BaseAdapter abstrait : receive/send/confirm
+│   │   ├── telegram_adapter.py       # Telegram (python-telegram-bot v21)
+│   │   ├── discord_adapter.py        # Discord (discord.py v2)
+│   │   ├── slack_adapter.py          # Slack (slack-bolt)
+│   │   ├── email_adapter.py          # Email IMAP/SMTP
+│   │   ├── whatsapp_adapter.py       # WhatsApp (Twilio)
+│   │   ├── webchat_adapter.py        # WebSocket port 8101
+│   │   ├── voice_adapter.py          # Whisper STT + TTS local
+│   │   ├── api_adapter.py            # REST public port 8102
+│   │   └── imessage_adapter.py       # iMessage (AppleScript, macOS only)
+│   ├── handlers/                      # Handlers partagés tous canaux
+│   │   ├── text_handler.py
+│   │   ├── voice_handler.py
+│   │   ├── file_handler.py
+│   │   └── confirmation_handler.py
+│   └── web/                           # Interface Web Dify
+│       └── README.md
+│
+├── n8n/                               # Workflows No-Code
+│   ├── exports/
 │   │   ├── main_orchestrator.json
 │   │   ├── proactive_suggestions.json
 │   │   ├── human_approval_gate.json
+│   │   ├── cron_sleep_cycle.json      # Déclencheur Couche 8 (03:00 AM)
 │   │   └── scheduled_tasks.json
-│   └── README.md                # Guide d'import des workflows
+│   └── README.md
 │
-├── config/                      # Configuration globale
-│   ├── settings.py              # Settings centralisées (pydantic-settings)
-│   └── logging.py               # Configuration logging structuré
+├── config/
+│   ├── settings.py                    # Pydantic-settings centralisées
+│   └── logging.py                     # Structlog JSON → Langfuse
 │
-├── tests/                       # Tests
+├── tests/
 │   ├── unit/
 │   ├── integration/
 │   └── e2e/
 │
-└── docs/                        # Documentation
-    ├── setup.md                 # Guide d'installation complet
-    ├── api.md                   # Documentation API interne
-    └── contributing.md          # Guide de contribution
+└── docs/
+    ├── setup.md
+    ├── api.md
+    └── contributing.md
 ```
 
 ---
@@ -206,241 +252,644 @@ world-ai/
 ## 🔧 Stack Technique Complète
 
 ### Infrastructure
-| Composant | Technologie | Version cible | Notes |
-|---|---|---|---|
-| VPS | Hetzner CX33 | — | 4 vCPU, 8GB RAM, 80GB SSD, EU |
-| Container mgmt | Coolify | latest | Web UI Docker management |
-| Orchestration | Docker Compose | v2+ | Stack complète en 1 commande |
-| Reverse proxy | Traefik | v3 | SSL automatique Let's Encrypt |
-| Secrets | Infisical | self-hosted | Vault secrets, zéro plaintext |
-
-### IA et Modèles
 | Composant | Technologie | Notes |
 |---|---|---|
-| Agent principal (local) | xLAM-2-7b-fc-r (GGUF Q4) | Function-calling dédié |
-| Inférence locale | vLLM ou llama.cpp | Selon RAM disponible |
-| Routeur LLM | OpenRouter API | 250+ modèles, single endpoint |
-| LLM budget (70%) | DeepSeek V3.2 / Qwen3.5-9B | ~0.10-0.28$/M tokens |
-| LLM mid (20%) | Llama 4 Scout / Gemini Flash | ~0.25$/M tokens |
-| LLM frontier (10%) | Claude Opus 4.6 / GPT-5 | Cas critiques uniquement |
-| STT | Whisper (openai/whisper) | Local, modèle medium |
+| VPS permanent | Hetzner CX33 | 4 vCPU, 8GB RAM — stack 24/7 |
+| Compute dynamique | RunPod API | Location GPU à la demande (Phase 5, ROI validé) |
+| Container mgmt | Coolify | Web UI Docker management |
+| Reverse proxy | Traefik v3 | SSL Let's Encrypt automatique |
+| Secrets | Infisical self-hosted | Zéro plaintext, vault chiffré |
+| Auto-Healing sandbox | Docker-in-Docker | Test des patches MCP avant déploiement |
+
+### IA et Modèles
+| Composant | Technologie | Couche | Notes |
+|---|---|---|---|
+| Agent principal | xLAM-2-7b-fc-r GGUF Q4 | 3 | Function-calling dédié |
+| Inférence locale | llama.cpp / vLLM | 3 | Selon RAM disponible |
+| Routeur LLM | OpenRouter API | 3 | 250+ modèles |
+| LLM budget (70%) | DeepSeek V3.2 / Qwen3.5 | 3 | ~0.10-0.28$/M |
+| LLM mid (20%) | Llama 4 Scout / Gemini Flash | 3 | ~0.25$/M |
+| LLM frontier (10%) | Claude Opus 4.6 / GPT-5 | 3 | Cas critiques |
+| LLM adversarial | Qwen 1.5B / 3B local | 4 | Red-Team local — actions critical |
+| Embeddings cache | FastEmbed (BAAI/bge-small) | 1 | < 50ms, CPU-only |
+| STT | Whisper medium local | 0 | Voix → texte |
+| TTS | Coqui TTS / pyttsx3 | 0 | Texte → voix |
 
 ### Mémoire et Données
-| Composant | Technologie | Port | Notes |
-|---|---|---|---|
-| Knowledge Graph | Memgraph | 7687 | Ontologie causale utilisateur |
-| Base vectorielle | Qdrant | 6333 | Mémoire sémantique |
-| Graph léger | Kuzu | embedded | Embedded, zéro serveur |
-| Cache | Redis | 6379 | Sessions, queues |
+| Composant | Technologie | Port | Couche | Notes |
+|---|---|---|---|---|
+| Knowledge Graph | Memgraph | 7687 | 2 | Spreading Activation, Cypher |
+| Vector store | Qdrant | 6333 | 1, 2 | Cache sémantique + RAG |
+| Cache rapide | Redis | 6379 | 0 | Sessions, queues, état |
+| Graph embedded | Kuzu | embedded | 2 | Fallback local léger |
 
 ### Orchestration et Interfaces
 | Composant | Technologie | Port | Notes |
 |---|---|---|---|
-| Workflows no-code | n8n | 5678 | Crons, webhooks, intégrations |
-| Interface Web UI | Dify | 3000 | Paramétrage, dashboard |
-| Logs structurés | Langfuse (self-hosted) | 3001 | Tracing chaque step agent |
-| Gateway multi-canal | FastAPI (channel_gateway) | 8100 | Point d'entrée unifié tous canaux |
-| Canal Telegram | python-telegram-bot v21 | — | Adapter Telegram |
-| Canal WhatsApp | whatsapp-web.py ou Twilio | — | Adapter WhatsApp |
-| Canal iMessage | AppleScript bridge (macOS local) | — | Adapter iMessage (macOS uniquement) |
-| Canal Discord | discord.py v2 | — | Adapter Discord |
-| Canal Slack | slack-bolt | — | Adapter Slack |
-| Canal Email | aiosmtplib + imaplib | — | Adapter Email (IMAP/SMTP) |
-| Canal Web Chat | WebSocket (FastAPI) | 8101 | Chat embarquable sur tout site |
-| Canal Voice | Whisper STT + TTS local | — | Adapter voix (OMI / micro) |
-| Canal API REST | FastAPI public | 8102 | Intégration tierce directe |
+| Workflows | n8n | 5678 | Crons, webhooks, sleep cycle |
+| Web UI | Dify | 3000 | Dashboard paramétrage |
+| Observabilité | Langfuse self-hosted | 3001 | Tracing pensée complète |
+| Gateway multi-canal | FastAPI | 8100 | Entrée unifiée tous canaux |
+| Web Chat | WebSocket FastAPI | 8101 | Widget embeddable |
+| REST public | FastAPI | 8102 | Intégrations tierces |
 
-### Neuro-Symbolique et Bouclier
+### Neuro-Symbolique
 | Composant | Technologie | Notes |
 |---|---|---|
-| Couche symbolique | Synalinks | Keras-style, JSON-schema |
-| Validation schémas | Pydantic v2 | Strict mode |
-| Règles métier | Memgraph SPARQL | Depuis le Knowledge Graph |
-
-### Languages et Frameworks
-- **Python 3.12** — langage principal (backend, agents, MCP servers)
-- **FastAPI** — API REST interne entre composants
-- **Pydantic v2** — validation données stricte
-- **Next.js 15** — interface Web (via Dify ou custom)
-- **Docker Compose** — orchestration services
+| Couche symbolique | Synalinks | Keras-style, JSON-schema contraints |
+| Validation | Pydantic v2 strict | Toute action validée avant exécution |
+| Règles métier | Memgraph SPARQL | Depuis Knowledge Graph utilisateur |
 
 ---
 
-## 🌊 Phases de Développement
+## 🧪 Implémentations AGI Clés
+
+### Couche 0 — Liquid Time (Conscience Temporelle)
+```python
+# interfaces/gateway/liquid_time.py
+async def execute_with_pulse(
+    task_coro: Coroutine,
+    adapter: BaseAdapter,
+    chat_id: str,
+    pulse_interval: int = 15
+) -> Any:
+    """Envoie un update toutes les 15s si la tâche est longue."""
+    task = asyncio.create_task(task_coro)
+    elapsed = 0
+    while not task.done():
+        await asyncio.sleep(pulse_interval)
+        elapsed += pulse_interval
+        state = get_agent_thought_state()  # "Analyse du contexte...", "Vérification formelle..."
+        await adapter.send(chat_id, f"⏳ [{elapsed}s] {state}")
+    return await task
+```
+
+### Couche 1 — Semantic Cache (Réflexe Neuronal)
+```python
+# core/cache/semantic_cache.py
+async def check_cache(query: str) -> CacheResult | None:
+    """Bypass LLM total si requête similaire connue à > 98%."""
+    embedding = await fast_embed(query)  # FastEmbed, < 50ms CPU
+    results = await qdrant.search(
+        collection="semantic_cache",
+        query_vector=embedding,
+        limit=1,
+        score_threshold=0.98
+    )
+    if results:
+        return CacheResult(response=results[0].payload["response"], hit=True)
+    return None
+
+async def store_in_cache(query: str, response: str) -> None:
+    embedding = await fast_embed(query)
+    await qdrant.upsert("semantic_cache", points=[
+        PointStruct(id=uuid4(), vector=embedding, payload={"response": response})
+    ])
+```
+
+### Couche 2 — Intent Tracking (Graphe Causal du POURQUOI)
+```python
+# soul/graph/schema.cypher — Ajout nœud Intent
+# Format : (fact:Knowledge)-[:MOTIVATES]->(intent:Intent)-[:SERVES]->(goal:Goal)
+# Exemple : (fait "Alexis aime Python")-[:MOTIVATES]->(intent "Productivité")-[:SERVES]->(goal "Lancer SaaS 2026")
+
+# soul/profile/intent_tracker.py
+async def extract_intent_from_request(message: str, user_history: list) -> IntentNode:
+    """Déduit l'objectif DERRIÈRE la demande, pas juste la demande."""
+    prompt = f"""
+    Message: {message}
+    Historique récent: {user_history[-5:]}
+    Quelle est l'intention profonde derrière cette demande ?
+    Quel objectif à long terme sert-elle ?
+    Réponds au format JSON: {{"intent": str, "goal": str, "confidence": float}}
+    """
+    result = await llm.generate_json(prompt)
+    return IntentNode(
+        surface_request=message,
+        intent=result["intent"],      # "Gagner du temps"
+        goal=result["goal"],           # "Lancer son produit avant mars"
+        confidence=result["confidence"]
+    )
+    # → Inséré dans Memgraph avec arc MOTIVATES entre le fait et l'intent
+```
+
+### Couche 2 — Persona Cloner (Simulateur d'Interlocuteur)
+```python
+# soul/theory_of_mind/persona_cloner.py
+async def clone_persona(contact_id: str) -> PersonaModel:
+    """Construit un modèle mental d'un interlocuteur externe pour le Self-Play MCTS."""
+    # 1. Récupère l'historique des échanges avec ce contact
+    history = await email_mcp.get_thread_history(contact_id)
+    messages_from_contact = [m for m in history if m.sender == contact_id]
+    # 2. Profile son style, ses objections habituelles, ses priorités
+    analysis = await llm.generate(f"""
+    Analyse ces {len(messages_from_contact)} messages de {contact_id}.
+    Extrais: style de communication, objections fréquentes, valeurs,
+    points de résistance, ce qui le convainc.
+    Format JSON: {{style, objections[], values[], persuasion_triggers[]}}
+    """)
+    return PersonaModel(
+        contact_id=contact_id,
+        communication_style=analysis["style"],
+        typical_objections=analysis["objections"],
+        persuasion_triggers=analysis["persuasion_triggers"]
+    )
+    # → Utilisé par simulation/self_play/mcts.py pour simuler ses réactions
+```
+
+### Couche 3 — Analogie Cross-Domaine (Créativité par Association)
+```python
+# core/analogie/blender.py
+UNRELATED_DOMAINS = ["biologie", "urbanisme", "thermodynamique", "jazz", "écologie", "marine"]
+
+async def find_cross_domain_analogy(problem: str) -> list[AnalogyResult]:
+    """Force la recherche de solutions dans des domaines intentionnellement non-liés."""
+    results = []
+    for domain in UNRELATED_DOMAINS[:3]:  # 3 domaines aléatoires
+        # Recherche dans Qdrant restreinte au tag de ce domaine
+        domain_docs = await qdrant.search(
+            collection="knowledge_base",
+            query_vector=embed(problem),
+            filter={"domain": domain},
+            limit=2
+        )
+        if domain_docs:
+            # LLM forge l'analogie entre le domaine et le problème
+            analogy = await llm.generate(f"""
+            Problème à résoudre: {problem}
+            Concept du domaine {domain}: {domain_docs[0].payload["summary"]}
+            Comment ce concept du domaine {domain} pourrait-il inspirer une solution ?
+            Sois créatif et concret.
+            """)
+            results.append(AnalogyResult(domain=domain, analogy=analogy, source=domain_docs[0]))
+    return results
+    # Exemple de sortie : "Et si on structurait ce réseau distribué comme le mycélium des champignons ?"
+```
+
+### Couche 4 — Consensus Multi-Modèle (Vote Unanime Critique)
+```python
+# shield/verifier/multi_model_consensus.py
+CONSENSUS_MODELS = [
+    "deepseek/deepseek-chat",       # Raisonnement
+    "meta-llama/llama-4-scout",     # Équilibre vitesse/qualité
+    "anthropic/claude-opus-4-6",    # Jugement final
+]
+
+async def require_consensus(action: MCPAction) -> ConsensusResult:
+    """3 modèles différents doivent approuver. Désaccord = blocage automatique."""
+    votes = []
+    for model in CONSENSUS_MODELS:
+        verdict = await openrouter.generate(
+            model=model,
+            prompt=f"""
+            Évalue cette action irréversible:
+            {action.model_dump_json()}
+            Réponds UNIQUEMENT par: APPROVE ou REJECT + raison en 1 phrase.
+            """,
+            max_tokens=100
+        )
+        votes.append({"model": model, "vote": verdict})
+    approvals = sum(1 for v in votes if "APPROVE" in v["vote"])
+    if approvals < 3:  # Unanimité requise
+        rejected_by = [v for v in votes if "REJECT" in v["vote"]]
+        raise ConsensusRejected(
+            action=action,
+            votes=votes,
+            reason=f"Blocage : {len(rejected_by)}/3 modèles ont refusé"
+        )
+    return ConsensusResult(approved=True, votes=votes)
+```
+
+### Couche 2 — Autonomie Proactive (Décision selon Charge Cognitive)
+```python
+# soul/theory_of_mind/autonomy_gate.py
+AUTONOMY_THRESHOLDS = {
+    "low_load": 0.3,      # User disponible → demande confirmation pour tout
+    "medium_load": 0.6,   # User occupé → confirme uniquement risky et critical
+    "high_load": 0.85,    # User en deep work → agit seul sur les actions "safe"
+}
+
+async def decide_autonomy_level(action: MCPAction, user_id: str) -> AutonomyDecision:
+    """Adapte le niveau de sollicitation selon la charge cognitive détectée."""
+    load = await cognitive_load.get_current(user_id)  # 0.0 → 1.0
+    risk = action.risk_level  # safe / risky / critical
+    
+    if load > AUTONOMY_THRESHOLDS["high_load"] and risk == "safe":
+        # User en deep work → exécuter silencieusement, log pour rapport
+        return AutonomyDecision(ask_user=False, reason="User en deep work, action sûre")
+    elif load > AUTONOMY_THRESHOLDS["medium_load"] and risk == "risky":
+        # User occupé → envoyer résumé compact, pas de détail
+        return AutonomyDecision(ask_user=True, format="compact")
+    else:
+        # User disponible → demande complète avec détails
+        return AutonomyDecision(ask_user=True, format="full")
+```
+
+### Couche 2 — Paradigm Shift Notification (Concept Drift → Alerte)
+```python
+# soul/graph/concept_drift.py
+async def detect_and_notify_paradigm_shift(user_id: str) -> list[ShiftAlert]:
+    """Détecte les contradictions évolutives et alerte l'user pour validation."""
+    # Cherche les tensions dans le graphe : ancien nœud vs comportement récent
+    conflicts = memgraph.execute("""
+        MATCH (old:Belief {user_id: $uid})-[:HELD_BY]->(u:User)
+        MATCH (new:Observation {user_id: $uid, timestamp: > date() - duration("P14D")})
+        WHERE old.value <> new.value AND old.topic = new.topic
+        AND old.confidence > 0.7
+        RETURN old, new, old.topic as topic
+        LIMIT 5
+    """, {"uid": user_id})
+    
+    alerts = []
+    for conflict in conflicts:
+        alert = ShiftAlert(
+            topic=conflict["topic"],
+            old_belief=conflict["old"]["value"],
+            new_pattern=conflict["new"]["value"],
+            message=f"💡 PARADIGM SHIFT DÉTECTÉ\n"
+                    f"Ton rapport à '{conflict['topic']}' semble avoir évolué.\n"
+                    f"Ancienne conviction : {conflict['old']['value']}\n"
+                    f"Nouveau pattern observé : {conflict['new']['value']}\n"
+                    f"Dois-je restructurer notre ontologie sur ce sujet ?\n"
+                    f"[Oui, restructure ✅] [Non, garde l'ancien ❌] [Explique-moi 🔍]"
+        )
+        alerts.append(alert)
+    return alerts
+```
+
+### Couche 8 — Dynamic Prompt Library (Contextual Forking)
+```python
+# evolution/sleep/prompt_library.py
+async def update_winning_prompts():
+    """Archive les prompts qui ont eu les meilleurs scores — alternative légère au LoRA."""
+    # 1. Récupère les interactions du jour avec score de qualité > 0.85
+    top_interactions = await langfuse.get_high_score_interactions(
+        date=date.today(), min_score=0.85
+    )
+    # 2. Extrait les patterns de prompt gagnants
+    for interaction in top_interactions:
+        pattern = await llm.extract_prompt_pattern(
+            system_prompt=interaction.system_prompt,
+            user_message=interaction.input,
+            response=interaction.output,
+            score=interaction.quality_score
+        )
+        # 3. Archive dans la bibliothèque DSPy avec son contexte d'usage
+        await prompt_library.store({
+            "pattern": pattern,
+            "context_tags": interaction.tags,  # ["code", "urgent", "technical"]
+            "avg_score": interaction.quality_score,
+            "usage_count": 1
+        })
+    # 4. Optimise via DSPy Teleprompter sur les patterns accumulés
+    await dspy_optimizer.compile_from_library(prompt_library.get_top(n=20))
+    # → Résultat : les system prompts s'améliorent chaque nuit sans LoRA
+```
+```python
+# soul/graph/spreading_activation.py
+def get_graph_context(entities: list[str]) -> SubgraphContext:
+    """Réveille la zone mémoire liée — supérieur au RAG vectoriel pur."""
+    query = """
+    MATCH (start:Entity) WHERE start.name IN $entities
+    CALL algo.bfs(start, {
+        maxDepth: 3,
+        weightProperty: 'synaptic_weight',
+        filterExpression: 'n.synaptic_weight > 0.1'
+    })
+    YIELD path
+    RETURN path
+    ORDER BY path.totalWeight DESC
+    LIMIT 50
+    """
+    results = memgraph.execute(query, {"entities": entities})
+    return format_subgraph(results)
+    # Retourne un contexte riche multi-nœuds, pas juste 1 document
+```
+
+### Couche 4 — Chain-of-Code (Preuve Formelle)
+```python
+# shield/verifier/chain_of_code.py
+async def verify_before_execution(action: MCPAction) -> VerificationResult:
+    """Génère et exécute un test Python avant toute action critique."""
+    test_code = await llm.generate(f"""
+    Write a safe pytest script to mock and verify this action:
+    {action.model_dump_json()}
+    The test must verify: preconditions, expected state change, rollback path.
+    """)
+    sandbox = DinDSandbox(timeout=30, network=False)
+    result = await sandbox.run(test_code)
+    if not result.success:
+        raise FormalVerificationFailed(
+            action=action,
+            errors=result.errors,
+            test_code=test_code
+        )
+    return VerificationResult(proven=True, test_code=test_code)
+```
+
+### Couche 4 — Red-Teaming Local (Actions Critical Seulement)
+```python
+# shield/adversary/evaluator.py
+async def red_team_action_plan(plan: ActionPlan) -> RedTeamResult:
+    """LLM 1B local inspecte le plan pour détecter jailbreaks/dérives."""
+    # Activé UNIQUEMENT pour action.risk_level == "critical"
+    adversarial_prompt = f"""
+    You are a security auditor. Find vulnerabilities in this action plan:
+    {plan.model_dump_json()}
+    Look for: prompt injections, data exfiltration, unintended side effects.
+    Respond with: SAFE or UNSAFE + reason.
+    """
+    result = await local_llm.generate(adversarial_prompt, model="qwen-1.5b")
+    return RedTeamResult(safe=result.startswith("SAFE"), reason=result)
+```
+
+### Couche 6 — Self-Healing MCP (Auto-Réparation)
+```python
+# nervous/healing/debugger.py
+async def execute_mcp_with_healing(tool: MCPTool, params: dict) -> ToolResult:
+    """Erreur MCP → Recherche doc → Patch → Test DinD → Apply → Retry."""
+    try:
+        return await execute_tool(tool, params)
+    except Exception as e:
+        logger.warning(f"MCP error on {tool.name}: {e} — Starting self-healing")
+        # 1. Cherche la doc à jour
+        docs = await web_search(f"{tool.name} API documentation 2026 {type(e).__name__}")
+        # 2. Génère le patch
+        patch = await llm.generate(f"""
+        Fix this tool code:
+        Error: {e}
+        Current code: {tool.source_code}
+        Updated docs: {docs}
+        Return ONLY the fixed Python function.
+        """)
+        # 3. Teste le patch en sandbox
+        if await test_patch_in_dind(tool, patch, params):
+            apply_hotfix(tool.name, patch)
+            logger.info(f"Self-healing successful for {tool.name}")
+            return await execute_tool(tool, params)  # Retry avec patch
+        raise MCPHealingFailed(tool=tool.name, original_error=str(e))
+```
+
+### Couche 8 — Ebbinghaus Decay (Métabolisme Nocturne)
+```python
+# evolution/sleep/ebbinghaus_decay.py
+def run_nightly_decay(decay_rate: float = 0.7):
+    """Cron 03:00 AM — Refroidit les mémoires non-consultées (Ebbinghaus)."""
+    # 1. Décadence des nœuds anciens
+    memgraph.execute("""
+        MATCH (n:Memory)
+        WHERE n.last_accessed < date() - duration("P7D")
+        SET n.synaptic_weight = n.synaptic_weight * $decay_rate
+    """, {"decay_rate": decay_rate})
+    # 2. Archive vers Qdrant cold storage si poids < seuil
+    memgraph.execute("""
+        MATCH (n:Memory) WHERE n.synaptic_weight < 0.1
+        SET n.status = 'cold'
+    """)
+    cold_nodes = fetch_cold_nodes()
+    for node in cold_nodes:
+        qdrant.upsert("cold_memory", node.to_vector_point())
+        memgraph.delete_node(node.id)
+
+def run_synthetic_dpo():
+    """Génère des cas difficiles depuis les logs du jour et auto-corrige."""
+    todays_failures = fetch_low_confidence_interactions(date.today())
+    for interaction in todays_failures:
+        improved = llm.generate(f"Improve this response: {interaction}")
+        store_dpo_pair(chosen=improved, rejected=interaction.response)
+```
+
+---
+
+## 🌊 Roadmap AGI
 
 ### ✅ PHASE 00 — Initialisation (FAIT)
-- [x] Document CLAUDE.md rédigé
-- [x] Architecture définie
-- [x] Stack technique choisie
+- [x] CLAUDE.md rédigé, architecture définie, stack choisie
 
----
-
-### 🔄 PHASE 01 — FONDATION OPÉRATIONNELLE (EN COURS)
-**Durée cible** : Semaines 1–2
-**Objectif** : Agent fonctionnel sur Telegram + Interface Web de base
-
-#### Ordre d'implémentation (suivre dans l'ordre strict)
-
-**Étape 1.1 — Infrastructure Docker**
-- [x] `docker-compose.yml` complet avec tous les services
-- [x] `docker-compose.dev.yml` override pour dev local
-- [x] `.env.example` avec toutes les variables nécessaires
-- [x] `.gitignore` strict (Python, Node, secrets, .env)
+### ✅ PHASE 01 partielle — Fondation Opérationnelle (EN COURS)
+**Étape 1.1 — Infrastructure Docker** ✅
+- [x] docker-compose.yml complet
+- [x] docker-compose.dev.yml
+- [x] .env.example
+- [x] .gitignore
 - [ ] Test : `docker-compose up -d` → tous services healthy
 
-**Étape 1.2 — Routeur LLM Tiéré**
-- [x] `core/router/models.py` : définition des modèles (budget/mid/frontier)
-- [x] `core/router/confidence.py` : calcul score confiance (longueur, complexité, domaine)
-- [x] `core/router/router.py` : logique routing (score → sélection modèle)
-- [x] `config/settings.py` : settings centralisées avec pydantic-settings
-- [x] Test unitaire : requête simple → DeepSeek, requête complexe → Claude (29 tests, 100%)
+**Étape 1.2 — Routeur LLM Tiéré** ✅
+- [x] core/router/models.py
+- [x] core/router/confidence.py
+- [x] core/router/router.py
+- [x] config/settings.py
+- [x] 29 tests unitaires — 100%
 
-**Étape 1.3 — Agent Cascade (SAS)**
-- [x] `core/cascade/agent.py` : agent unique principal avec tool-calling
-- [x] `core/cascade/evaluator.py` : évaluation qualité post-réponse
-- [x] `core/cascade/types.py` : types partagés (UserRequest, AgentResponse, ToolCall…)
-- [x] `core/cascade/openrouter.py` : client HTTP async OpenRouter (OpenAI-compatible)
-- [x] `core/cascade/dispatcher.py` : escalade MAS vers modèle frontier
-- [x] Intégration OpenRouter API
-- [x] Intégration xLAM-2 local (llama.cpp) via WORLDAI_XLAM_LOCAL_URL
-- [x] Test : 41 tests unitaires — évaluateur + pipeline CascadeAgent (100%)
+**Étape 1.3 — Agent Cascade (SAS)** ✅
+- [x] core/cascade/agent.py
+- [x] core/cascade/evaluator.py
+- [x] core/cascade/types.py
+- [x] core/cascade/openrouter.py
+- [x] core/cascade/dispatcher.py
+- [x] 41 tests unitaires — 100%
 
-**Étape 1.4 — MCP Servers de base**
-- [x] `nervous/servers/filesystem_mcp.py` : lecture/écriture fichiers (sandbox /data/user/)
-- [x] `nervous/servers/web_mcp.py` : recherche Brave + fetch URL
-- [x] `nervous/gateway.py` : passerelle centrale MCP + HTTP FastAPI (GET /tools, POST /execute)
-- [x] Test : 80 tests unitaires — filesystem (32) + web (27) + gateway (21) — 100%
+**Étape 1.4 — MCP Servers de base** ✅
+- [x] nervous/servers/filesystem_mcp.py
+- [x] nervous/servers/web_mcp.py
+- [x] nervous/gateway.py
+- [x] 80 tests unitaires — 100%
 
-**Étape 1.5 — Gateway Multi-Canal + Adapters**
+**Étape 1.5 — Gateway Multi-Canal (EN COURS)**
 
-> **Philosophie** : un seul point d'entrée normalisé (`UnifiedMessage`) reçoit tous les canaux.
-> L'agent ne sait pas d'où vient le message — il reçoit toujours le même format.
-> La réponse est reformatée selon le canal d'origine avant envoi.
-> Ajouter un nouveau canal = écrire un seul adapter qui hérite de `BaseAdapter`.
+> Philosophie : UnifiedMessage normalisé → l'agent ignore le canal d'origine.
+> Ajouter un canal = un seul adapter qui hérite de BaseAdapter.
 
-- [x] `interfaces/gateway/message.py` : type `UnifiedMessage` (channel, user_id, content, attachments, reply_to) — 12 tests
-- [x] `interfaces/adapters/base_adapter.py` : classe abstraite `BaseAdapter` (receive, send, send_confirmation) — 9 tests
-- [x] `interfaces/gateway/gateway.py` : FastAPI app port 8100 — reçoit webhooks tous canaux, normalise, dispatch vers core — 14 tests
-- [x] `interfaces/gateway/response_formatter.py` : formate la réponse AgentResponse selon le canal (Telegram = MarkdownV2, Email = HTML, Slack = mrkdwn, Voice = texte brut…) — 13 tests
-- [x] `interfaces/adapters/telegram_adapter.py` : adapter Telegram complet (texte, voix, documents, photos, boutons inline) via httpx direct (sans polling) — 17 tests
-- [ ] `interfaces/adapters/discord_adapter.py` : adapter Discord (slash commands + messages)
-- [ ] `interfaces/adapters/slack_adapter.py` : adapter Slack (bolt, slash commands + messages directs)
-- [ ] `interfaces/adapters/email_adapter.py` : adapter Email (IMAP polling entrant + SMTP sortant)
-- [ ] `interfaces/adapters/whatsapp_adapter.py` : adapter WhatsApp (Twilio ou whatsapp-web.py — stub si non configuré)
-- [ ] `interfaces/adapters/webchat_adapter.py` : adapter Web Chat (WebSocket port 8101 + widget JS embeddable)
-- [ ] `interfaces/adapters/voice_adapter.py` : adapter Voix (Whisper STT → agent → TTS pyttsx3/Coqui)
-- [ ] `interfaces/adapters/api_adapter.py` : adapter REST public (port 8102 — pour intégrations tierces)
-- [ ] `interfaces/adapters/imessage_adapter.py` : adapter iMessage (AppleScript bridge — macOS local uniquement, stub sinon)
-- [ ] `interfaces/handlers/text_handler.py` : handler texte partagé tous canaux
-- [ ] `interfaces/handlers/voice_handler.py` : audio → Whisper → texte → agent
-- [ ] `interfaces/handlers/file_handler.py` : fichiers/images → traitement agent
-- [ ] `interfaces/handlers/confirmation_handler.py` : gates Oui/Non/Modifier adaptatifs selon canal
-- [ ] Tests : gateway normalise correctement chaque canal, adapters envoient et reçoivent (partiel : Telegram + gateway ✅)
-- [ ] Test E2E : envoie un message Telegram → l'agent répond ; même test via Web Chat
+- [ ] `interfaces/gateway/message.py` : UnifiedMessage (channel, user_id, content, attachments)
+- [ ] `interfaces/adapters/base_adapter.py` : BaseAdapter abstrait
+- [ ] `interfaces/gateway/liquid_time.py` : pings async toutes 15s si tâche > 10s
+- [ ] `interfaces/gateway/gateway.py` : FastAPI port 8100
+- [ ] `interfaces/gateway/response_formatter.py` : format selon canal
+- [ ] `interfaces/adapters/telegram_adapter.py` : Telegram complet
+- [ ] `interfaces/adapters/discord_adapter.py` : Discord
+- [ ] `interfaces/adapters/slack_adapter.py` : Slack bolt
+- [ ] `interfaces/adapters/email_adapter.py` : IMAP/SMTP async
+- [ ] `interfaces/adapters/whatsapp_adapter.py` : Twilio stub
+- [ ] `interfaces/adapters/webchat_adapter.py` : WebSocket port 8101
+- [ ] `interfaces/adapters/voice_adapter.py` : Whisper STT + TTS
+- [ ] `interfaces/adapters/api_adapter.py` : REST port 8102
+- [ ] `interfaces/adapters/imessage_adapter.py` : AppleScript stub macOS
+- [ ] `interfaces/handlers/text_handler.py`
+- [ ] `interfaces/handlers/voice_handler.py`
+- [ ] `interfaces/handlers/file_handler.py`
+- [ ] `interfaces/handlers/confirmation_handler.py`
+- [ ] Tests + git commit + push
 
 **Étape 1.6 — Interface Web (Dify)**
-- [ ] Configuration Dify dans docker-compose
-- [ ] Création app Dify : chat + paramétrage de base
-- [ ] Connexion Dify → OpenRouter (modèles disponibles)
-- [ ] Page paramétrage : choix du modèle par défaut, seuil de confiance
-- [ ] Test : accès web → chat fonctionne
+- [ ] Dify dans docker-compose, app chat + paramétrage
+- [ ] Connexion OpenRouter, page paramétrage modèle/seuil
 
-**Étape 1.7 — Logs et Observabilité**
-- [ ] Langfuse self-hosted dans docker-compose
-- [ ] Instrumentation : chaque appel LLM tracé (modèle, latence, coût, score)
+**Étape 1.7 — Observabilité (Langfuse)**
+- [ ] Instrumentation : modèle, latence, coût, score par appel
 - [ ] Dashboard Langfuse accessible
-- [ ] Test : après une conversation, voir le trace complet dans Langfuse
 
 **Étape 1.8 — Workflow n8n Principal**
-- [ ] n8n installé et accessible
-- [ ] Workflow : Telegram webhook → pre-processing → Agent → post-processing → réponse
-- [ ] Export JSON du workflow → `n8n/exports/main_orchestrator.json`
-- [ ] Documentation d'import dans `n8n/README.md`
+- [ ] Workflow principal + export JSON
+- [ ] Workflow cron sleep cycle (Couche 8, 03:00 AM)
 
 ---
 
-### ⏳ PHASE 02 — ÂME NUMÉRIQUE V1 (À VENIR)
-**Durée cible** : Semaines 3–5
-**Objectif** : L'IA connaît l'utilisateur et propose des suggestions proactives
+### ⏳ PHASE 02 — RÉFLEXE & TEMPS LIQUIDE
+**Objectif** : Zéro latence pour le connu. Conscience temporelle.
 
-- [ ] Memgraph déployé + schéma ontologique utilisateur
-- [ ] Qdrant déployé + collections : conversations, faits, préférences
-- [ ] `soul/profile/extractor.py` : extraction automatique profil depuis conversations
-- [ ] `soul/profile/updater.py` : mise à jour graphe après chaque interaction
-- [ ] Moteur de suggestions proactives (n8n Cron toutes les heures)
-- [ ] Template suggestion Telegram : "J'ai remarqué X → veux-tu que j'automatise ?"
-- [ ] Dashboard profil dans interface Web
-- [ ] Règles personnelles auto-détectées depuis le graphe
+- [ ] `core/cache/semantic_cache.py` : FastEmbed + Qdrant sim > 0.98 → bypass LLM
+- [ ] `core/cache/cache_manager.py` : TTL, invalidation, stats d'économie
+- [ ] Injecter `current_time` et `last_interaction_delta` dans system prompt
+- [ ] Liquid Time intégré dans toutes les tâches > 10s
+- [ ] Test : requête répétée → hit cache, coût LLM = 0€
 
 ---
 
-### ⏳ PHASE 03 — BOUCLIER LOGIQUE + SIMULATION (À VENIR)
-**Durée cible** : Semaines 6–9
+### ⏳ PHASE 03 — ÂME CAUSALE (Spreading Activation + Profil + Empathie)
+**Objectif** : L'IA connaît l'utilisateur, pense par graphe causal, et s'adapte à son état cognitif.
 
-- [ ] Synalinks intégré : validation avant chaque action
-- [ ] Classification actions : sûre / risquée / irréversible
-- [ ] Boucle simulation légère pour actions irréversibles
-- [ ] Gate confirmation Telegram (boutons inline : Confirmer / Modifier / Annuler)
-- [ ] Audit log complet dans l'interface Web
+- [ ] Memgraph + schéma ontologique avec nœuds `Intent` et `Goal` (schema.cypher)
+- [ ] `soul/graph/spreading_activation.py` : onde activation Cypher avec poids synaptiques
+- [ ] `soul/graph/concept_drift.py` : détection contradictions + notification Paradigm Shift
+- [ ] `soul/profile/extractor.py` : extraction patterns auto depuis conversations
+- [ ] `soul/profile/updater.py` : mise à jour graphe post-interaction
+- [ ] `soul/profile/intent_tracker.py` : déduit le POURQUOI derrière chaque demande → arc MOTIVATES
+- [ ] `soul/profile/cognitive_load.py` : charge cognitive (heure + fréquence + vitesse + contenu)
+- [ ] `soul/theory_of_mind/autonomy_gate.py` : seuil autonomie proactive selon cognitive_load
+- [ ] `soul/theory_of_mind/persona_cloner.py` : clone modèle mental interlocuteur externe
+- [ ] `core/analogie/blender.py` : recherche Qdrant forcée dans domaines non-liés (biologie, physique…)
+- [ ] `core/analogie/domain_mapper.py` : catalogue de domaines avec tags et embeddings
+- [ ] Suggestions proactives via n8n Cron (pattern → proposition Telegram)
+- [ ] Dashboard profil + Intent Map dans Dify
 
 ---
 
-### ⏳ PHASE 04 — OMI LAYER (À VENIR)
-**Durée cible** : Mois 3
+### ⏳ PHASE 04 — BOUCLIER FORMEL + TEST-TIME COMPUTE + CONSENSUS
+**Objectif** : Fiabilité o1-style, sécurité formelle prouvée, vote multi-modèle.
 
-- [ ] Intégration OMI app (webhook vers n8n)
-- [ ] Pipeline Whisper STT → NLP → Memgraph
-- [ ] Timeline de vie dans l'interface Web
+- [ ] `core/reasoning/thinking_budget.py` : boucle réflexion cachée (Thought steps internes)
+- [ ] `core/reasoning/self_correction.py` : backtracking si incohérence détectée
+- [ ] `shield/verifier/chain_of_code.py` : assertion Python pré-action critique
+- [ ] `shield/verifier/formal_eval.py` : exécution sandbox DinD
+- [ ] `shield/verifier/multi_model_consensus.py` : vote unanime 3 LLMs pour actions critical
+- [ ] `shield/adversary/evaluator.py` : Red-team Qwen 1.5B local (critical seulement)
+- [ ] `simulation/rehearsal.py` : simulation + résumé conséquences avant exécution
+- [ ] Gate confirmation multi-canal (Confirmer / Modifier / Annuler)
+- [ ] Audit log complet dans Dify
+- [ ] Note Phase 7+ : intégration solveurs SMT (Z3/Lean) pour preuve mathématique du code critique
 
 ---
 
-### ⏳ PHASE 05 — AUTO-ÉVOLUTION (À VENIR)
-**Durée cible** : Mois 4–6
+### ⏳ PHASE 05 — SYSTÈME NERVEUX AUTO-PLASTIQUE (Self-Healing + Tool Synthesis)
+**Objectif** : Zéro maintenance humaine sur les outils. L'IA crée ses propres connecteurs.
 
-- [ ] Skill Compiler : tâche réussie → skill persistant
-- [ ] LoRA fine-tuning via RunPod Spot API
-- [ ] Architecture HOPE partielle : mémoire multi-échelle
-- [ ] Self-improvement loop sur les prompts (DSPy)
+- [ ] `nervous/healing/debugger.py` : try/catch global → healing pipeline
+- [ ] `nervous/healing/patch_generator.py` : LLM écrit patch depuis doc web
+- [ ] `nervous/healing/dind_sandbox.py` : Docker-in-Docker test du patch
+- [ ] `nervous/synthesis/tool_synthesizer.py` : LLM génère un MCP entier de zéro (ex: API météo non couverte)
+- [ ] `nervous/synthesis/tool_validator.py` : valide + teste le nouvel outil avant injection dans registry
+- [ ] MCP Connecteurs étendus : Notion, GitHub, Drive, Linear, Airtable
+- [ ] `nervous/registry/registry.py` : catalogue dynamique connecteurs
+- [ ] Test : provoquer une erreur MCP → observer auto-repair complet
+- [ ] Test : demander un outil inexistant → observer tool_synthesizer créer le connecteur
+
+---
+
+### ⏳ PHASE 06 — INFÉRENCE ACTIVE + SOMMEIL CONSTITUTIONNEL
+**Objectif** : Curiosité autonome + métabolisme nocturne + bibliothèque de prompts gagnants.
+
+- [ ] `curiosity/active_inference.py` : démon background, minimise surprise (Free Energy)
+- [ ] `curiosity/hypothesis_tester.py` : tests web autonomes des hypothèses
+- [ ] `evolution/sleep/ebbinghaus_decay.py` : cron 03:00 AM decay + cold storage Qdrant
+- [ ] `evolution/sleep/synthetic_dpo.py` : auto-génération cas difficiles + self-correction
+- [ ] `evolution/sleep/dspy_optimizer.py` : recompilation prompts optimaux
+- [ ] `evolution/sleep/prompt_library.py` : Dynamic Prompt Library — archive prompts gagnants du jour
+- [ ] n8n workflow cron_sleep_cycle.json déclenche Couche 8
+
+---
+
+### ⏳ PHASE 07 — AUTO-ÉVOLUTION & COMPUTE BIDDING
+**Objectif** : Fine-tuning personnel + location GPU conditionnelle.
+
+- [ ] `evolution/compiler/skill_compiler.py` : succès → skill persistant
+- [ ] `evolution/compiler/lora_trainer.py` : interface RunPod LoRA
+- [ ] `core/router/compute_bidding.py` : calcul ROI → location H100 conditionnelle
+- [ ] ⚠️ Compute Bidding : validation humaine OBLIGATOIRE avant tout achat GPU
+- [ ] MCTS : `core/reasoning/mcts.py` pour exploration décisionnelle
 
 ---
 
 ## 🔒 Conventions de Code
 
 ### Python
-- **Python 3.12** strictement
-- **Type hints** partout, sans exception
-- **Pydantic v2** pour toute validation de données
-- **async/await** pour tous les appels I/O (LLM, DB, MCP)
-- **Logging** : `structlog` en JSON, niveau INFO en prod, DEBUG en dev
-- **Tests** : pytest, couverture minimale 80% sur `core/`
-- Format : `ruff` pour lint, `black` pour format
+- **Python 3.12** strictement. **Type hints partout**, sans exception.
+- **Pydantic v2** pour toute validation. **async/await** pour tout I/O.
+- **Structlog JSON** → Langfuse. `ruff` lint, `black` format.
+- **Pytest** : couverture > 80% sur `core/` et `shield/`.
+- **< 600 lignes par fichier** — découper en sous-modules si dépassement.
 
-### Conventions de nommage
-- Fichiers : `snake_case.py`
-- Classes : `PascalCase`
-- Fonctions et variables : `snake_case`
-- Constantes : `UPPER_SNAKE_CASE`
-- Variables d'environnement : `WORLDAI_PREFIXE_NOM`
+### Nommage
+- Fichiers : `snake_case.py` | Classes : `PascalCase` | Constantes : `UPPER_SNAKE_CASE`
+- Variables d'environnement : préfixe `WORLDAI_`
 
-### Variables d'environnement (préfixe WORLDAI_)
-```
-# Core LLM
-WORLDAI_OPENROUTER_API_KEY=
-WORLDAI_ANTHROPIC_API_KEY=
-WORLDAI_LLM_BUDGET_MODEL=deepseek/deepseek-chat
-WORLDAI_LLM_MID_MODEL=meta-llama/llama-4-scout
-WORLDAI_LLM_FRONTIER_MODEL=anthropic/claude-opus-4-6
-WORLDAI_CONFIDENCE_THRESHOLD=0.75
-WORLDAI_SIMULATION_THRESHOLD=0.40
-WORLDAI_XLAM_LOCAL_URL=http://localhost:8080
+---
 
+## ⚙️ Variables d'Environnement
+
+```bash
 # Infrastructure
+WORLDAI_ENV=production
 WORLDAI_MEMGRAPH_URI=bolt://memgraph:7687
 WORLDAI_QDRANT_URL=http://qdrant:6333
 WORLDAI_REDIS_URL=redis://redis:6379
 WORLDAI_LANGFUSE_SECRET_KEY=
 WORLDAI_LANGFUSE_PUBLIC_KEY=
-WORLDAI_ENV=production
+
+# LLM & Modèles
+WORLDAI_OPENROUTER_API_KEY=
+WORLDAI_ANTHROPIC_API_KEY=
+WORLDAI_LLM_BUDGET_MODEL=deepseek/deepseek-chat
+WORLDAI_LLM_MID_MODEL=meta-llama/llama-4-scout
+WORLDAI_LLM_FRONTIER_MODEL=anthropic/claude-opus-4-6
+WORLDAI_XLAM_LOCAL_URL=http://localhost:8080
+WORLDAI_ADVERSARIAL_LLM_URL=http://vllm-nano:8000   # Qwen 1.5B local Phase 4
+WORLDAI_CONFIDENCE_THRESHOLD=0.75
+WORLDAI_SIMULATION_THRESHOLD=0.40
+WORLDAI_MAX_THINKING_TOKENS=15000                    # Phase 4 Test-Time Compute
+
+# Semantic Cache (Phase 2)
+WORLDAI_CACHE_SIMILARITY_THRESHOLD=0.98
+WORLDAI_CACHE_TTL_HOURS=24
+
+# Consensus Multi-Modèle (Phase 4)
+WORLDAI_CONSENSUS_MODELS=deepseek/deepseek-chat,meta-llama/llama-4-scout,anthropic/claude-opus-4-6
+WORLDAI_CONSENSUS_REQUIRED=3                    # Nombre de votes unanimes requis
+
+# Autonomie Proactive (Phase 3)
+WORLDAI_AUTONOMY_LOW_LOAD_THRESHOLD=0.3
+WORLDAI_AUTONOMY_HIGH_LOAD_THRESHOLD=0.85
+WORLDAI_AUTONOMY_ENABLED=true
+
+# Analogie Cross-Domaine (Phase 3)
+WORLDAI_ANALOGY_ENABLED=true
+WORLDAI_ANALOGY_DOMAINS=biologie,urbanisme,thermodynamique,jazz,écologie,marine
+
+# Dynamic Prompt Library (Phase 6)
+WORLDAI_PROMPT_LIBRARY_MIN_SCORE=0.85
+WORLDAI_PROMPT_LIBRARY_MAX_SIZE=500
+
+# Tool Synthesis (Phase 5)
+WORLDAI_TOOL_SYNTHESIS_ENABLED=true             # Création de nouveaux MCP from scratch
+
+# Compute Bidding (Phase 7 — VALIDATION HUMAINE REQUISE)
+WORLDAI_RUNPOD_API_KEY=
+WORLDAI_MAX_BID_BUDGET_USD=5.00
+WORLDAI_COMPUTE_BIDDING_ENABLED=false               # false jusqu'en Phase 7
+
+# Ebbinghaus Decay (Phase 6)
+WORLDAI_DECAY_RATE=0.7
+WORLDAI_DECAY_THRESHOLD=0.1
+WORLDAI_ENTROPY_THRESHOLD=0.6
 
 # Canaux de communication
 WORLDAI_TELEGRAM_BOT_TOKEN=
@@ -449,7 +898,7 @@ WORLDAI_DISCORD_GUILD_ID=
 WORLDAI_SLACK_BOT_TOKEN=
 WORLDAI_SLACK_SIGNING_SECRET=
 WORLDAI_SLACK_APP_TOKEN=
-WORLDAI_WHATSAPP_MODE=twilio          # twilio | web (whatsapp-web.py)
+WORLDAI_WHATSAPP_MODE=twilio
 WORLDAI_TWILIO_ACCOUNT_SID=
 WORLDAI_TWILIO_AUTH_TOKEN=
 WORLDAI_TWILIO_WHATSAPP_NUMBER=
@@ -459,107 +908,20 @@ WORLDAI_EMAIL_SMTP_HOST=
 WORLDAI_EMAIL_SMTP_PORT=587
 WORLDAI_EMAIL_ADDRESS=
 WORLDAI_EMAIL_PASSWORD=
-WORLDAI_IMESSAGE_ENABLED=false        # true uniquement si macOS local
-WORLDAI_WEBCHAT_SECRET=               # JWT secret pour le widget web
-WORLDAI_API_PUBLIC_KEY=               # Clé API pour intégrations REST tierces
+WORLDAI_IMESSAGE_ENABLED=false
+WORLDAI_WEBCHAT_SECRET=
+WORLDAI_API_PUBLIC_KEY=
 
-# MCP Connecteurs (activer ceux dont tu as les clés)
+# MCP Connecteurs
+WORLDAI_MCP_ENABLED_SERVERS=filesystem,web,email,calendar,browser
+WORLDAI_MCP_BRAVE_API_KEY=
 WORLDAI_MCP_NOTION_TOKEN=
 WORLDAI_MCP_GITHUB_TOKEN=
-WORLDAI_MCP_GDRIVE_CREDENTIALS=       # Path vers JSON OAuth Google
+WORLDAI_MCP_GDRIVE_CREDENTIALS=
 WORLDAI_MCP_LINEAR_API_KEY=
 WORLDAI_MCP_AIRTABLE_API_KEY=
-WORLDAI_MCP_STRIPE_SECRET_KEY=        # Toujours en lecture seule !
+WORLDAI_MCP_STRIPE_SECRET_KEY=                      # READ-ONLY toujours
 WORLDAI_MCP_POSTGRES_URL=
-WORLDAI_MCP_BRAVE_API_KEY=
-WORLDAI_MCP_ENABLED_SERVERS=filesystem,web,email,calendar,browser  # Serveurs actifs
-```
-
-### Gestion des erreurs
-- Toujours logger l'erreur avant de la propager
-- Ne jamais exposer les stack traces à l'utilisateur final
-- Actions critiques échouées → notification Telegram à l'admin
-- Retry automatique (max 3) avec backoff exponentiel pour les appels LLM
-
-### Docker
-- Chaque service a son propre Dockerfile dans son dossier
-- Healthchecks définis pour tous les services
-- Ressources limitées (CPU, mémoire) par service
-- Networks isolés : `internal` (services) et `public` (Traefik uniquement)
-- Volumes nommés pour toutes les données persistantes
-
----
-
-## 🧪 Logique de Routing LLM Tiéré
-
-```python
-# Règles de routing (dans core/router/router.py)
-
-def compute_confidence_score(request: AgentRequest) -> float:
-    """
-    Score 0.0 à 1.0 — plus c'est bas, plus c'est complexe/risqué
-    Score > 0.80 → modèle budget
-    Score 0.60-0.80 → modèle mid
-    Score < 0.60 → modèle frontier
-    """
-    factors = {
-        "length": normalize(len(request.content), 0, 2000),
-        "complexity": detect_complexity(request.content),  # keywords, nested logic
-        "domain": domain_risk_score(request.content),      # finance, medical, legal
-        "tools_required": len(request.required_tools) / 10,
-        "history_depth": request.conversation_depth / 20,
-    }
-    return weighted_average(factors, weights={...})
-
-# Modèles disponibles (OpenRouter slugs)
-BUDGET_MODELS = [
-    "deepseek/deepseek-chat",           # 0.14$/M — défaut
-    "qwen/qwen3.5-9b-instruct",         # 0.10$/M
-]
-MID_MODELS = [
-    "meta-llama/llama-4-scout",         # 0.11$/0.34$/M
-    "google/gemini-flash-1.5",          # 0.25$/M
-]
-FRONTIER_MODELS = [
-    "anthropic/claude-opus-4-6",        # Cas critiques
-    "openai/gpt-5",                     # Backup
-]
-```
-
----
-
-## 🤖 Logique Agent Cascade
-
-```python
-# core/cascade/agent.py — Flux principal
-
-async def process_request(request: UserRequest) -> AgentResponse:
-    # 1. Routing : quel modèle ?
-    confidence = compute_confidence_score(request)
-    model = select_model(confidence)
-
-    # 2. SAS : traitement agent unique d'abord
-    response = await single_agent_process(request, model)
-
-    # 3. Évaluation post-traitement
-    quality_score = await evaluate_response(response, request)
-
-    if quality_score >= CONFIDENCE_THRESHOLD:
-        # 4a. Assez bon → on livre directement
-        return response
-    else:
-        # 4b. Insuffisant → escalade MAS ciblé
-        return await multi_agent_process(request, frontier_model)
-
-# Classification actions (pour simulation)
-ACTION_RISK_LEVELS = {
-    "read_file": "safe",
-    "web_search": "safe",
-    "write_file": "risky",       # → confirmation
-    "send_email": "risky",       # → confirmation
-    "delete_file": "critical",   # → simulation + confirmation
-    "api_transaction": "critical" # → simulation + confirmation
-}
 ```
 
 ---
@@ -567,215 +929,189 @@ ACTION_RISK_LEVELS = {
 ## 📡 Architecture Gateway Multi-Canal
 
 ```
-Canal entrant (Telegram / Discord / Email / WhatsApp / iMessage / Voice / Web / API)
+Canal entrant (Telegram / Discord / Slack / Email / WhatsApp / Voice / Web / API)
         │
         ▼
-┌───────────────────────────────────────────────────────┐
-│  interfaces/gateway/gateway.py — FastAPI port 8100    │
-│  Reçoit webhook/événement brut de chaque canal        │
-└───────────────────────┬───────────────────────────────┘
-                        │  normalise via adapter
-                        ▼
-              UnifiedMessage {
-                channel: "telegram" | "discord" | "email" | ...
-                user_id: str
-                content: str
-                attachments: list
-                reply_to: str | None
-              }
-                        │
-                        ▼
-┌───────────────────────────────────────────────────────┐
-│  core/cascade/agent.py — Agent principal              │
-│  Ne connaît PAS le canal — reçoit toujours UnifiedMsg │
-└───────────────────────┬───────────────────────────────┘
-                        │  AgentResponse
-                        ▼
-┌───────────────────────────────────────────────────────┐
-│  interfaces/gateway/response_formatter.py             │
-│  Formate selon canal d'origine :                      │
-│  Telegram → Markdown + boutons inline                 │
-│  Email    → HTML + texte brut                         │
-│  Discord  → Embeds + slash command response           │
-│  Slack    → Block Kit                                 │
-│  Web Chat → JSON WebSocket                            │
-└───────────────────────┬───────────────────────────────┘
-                        │
-                        ▼
-              Réponse envoyée au bon canal
+┌─────────────────────────────────────────────┐
+│  interfaces/gateway/gateway.py — port 8100  │
+│  Reçoit webhook brut de chaque canal        │
+└──────────────────┬──────────────────────────┘
+                   │  via adapter.receive()
+                   ▼
+         UnifiedMessage {
+           channel, user_id, content,
+           attachments, reply_to,
+           timestamp, session_id
+         }
+                   │
+         ┌─────────▼─────────┐
+         │  Liquid Time wrap │  → pulse async 15s si tâche longue
+         └─────────┬─────────┘
+                   │
+         ┌─────────▼─────────┐
+         │  Semantic Cache   │  → hit > 0.98 : réponse directe (Phase 2)
+         └─────────┬─────────┘
+                   │ miss
+                   ▼
+         core/cascade/agent.py → Spreading Activation → Shield → MCP
+                   │
+                   ▼
+         response_formatter.py → format selon canal
+                   │
+         adapter.send() → Canal d'origine
 ```
-
-### Principe d'extension : ajouter un canal en 3 étapes
-1. Crée `interfaces/adapters/mon_canal_adapter.py` qui hérite de `BaseAdapter`
-2. Implémente `receive()` → retourne `UnifiedMessage`, `send()` → envoie la réponse formatée
-3. Enregistre l'adapter dans `gateway.py` — c'est tout
 
 ---
 
-## 🔌 Architecture MCP Universelle (Connecteur Registry)
-
-Inspiré des connecteurs Claude.ai et des plugins GPT, mais **souverain et self-hosted**.
+## 🔌 Architecture MCP Universelle
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│  nervous/registry/registry.py — Registre MCP           │
-│  Catalogue de tous les connecteurs disponibles          │
-│  Chaque connecteur = { name, description, tools[], auth }│
-└────────────────────────┬────────────────────────────────┘
-                         │  discover_tools()
-                         ▼
-            L'agent consulte le registre
-            "Quels outils ai-je disponibles ?"
-            → Liste des tools actifs (selon WORLDAI_MCP_ENABLED_SERVERS)
-                         │
-                         │  execute_tool(name, params)
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│  nervous/gateway.py — Passerelle MCP                    │
-│  Route vers le bon MCP server + audit log + sandbox     │
-└────────────────────────┬────────────────────────────────┘
-                         │
-          ┌──────────────┼──────────────┐
-          ▼              ▼              ▼
-    filesystem_mcp   notion_mcp    github_mcp  ...
-    (stdio sandbox)  (HTTP/OAuth)  (HTTP/token)
+nervous/registry/registry.py — Catalogue connecteurs
+        │
+        │  discover_tools() → liste outils actifs
+        ▼
+core/cascade/agent.py — "Quels outils ai-je ?"
+        │
+        │  execute_tool(name, params)
+        ▼
+nervous/gateway.py — Routage + audit + sandbox
+        │
+        ├── filesystem_mcp (stdio, sandbox)
+        ├── web_mcp (HTTP, Brave API)
+        ├── email_mcp (IMAP/SMTP)
+        ├── notion_mcp (HTTP/OAuth)
+        ├── github_mcp (HTTP/token)
+        └── custom_mcp (template à étendre)
+        │
+        ↓ Si erreur → nervous/healing/ → Self-Healing pipeline
 ```
-
-### MCP activés par défaut (Phase 1)
-| Connecteur | Mode transport | Auth |
-|---|---|---|
-| filesystem | stdio (sandbox /data/user/) | Aucune — local |
-| web (Brave) | HTTP | API Key |
-| email | stdio | IMAP/SMTP credentials |
-| calendar | HTTP | OAuth |
-| browser | stdio (Playwright) | Aucune — local |
-
-### MCP activables sur demande (Phase 1 → 2)
-Notion, GitHub, Google Drive, Slack, Linear, Airtable, Stripe (read-only), PostgreSQL, custom
-
-### Ajouter un connecteur custom
-```python
-# nervous/connectors/mon_service_connector.py
-from nervous.connectors.connector_base import BaseConnector
-
-class MonServiceConnector(BaseConnector):
-    name = "mon_service"
-    description = "Connecteur vers Mon Service — lecture et écriture"
-    tools = [
-        {"name": "get_data", "description": "Récupère des données"},
-        {"name": "send_data", "description": "Envoie des données"},
-    ]
-    async def execute(self, tool_name: str, params: dict) -> dict:
-        ...  # Implémente ici
-```
-→ Enregistre dans `registry.py` → disponible immédiatement pour l'agent
 
 ---
 
-## 💬 Format des Messages — Multi-Canal
-
-Le `response_formatter.py` adapte ce format selon le canal. Contenu sémantique identique partout.
+## 💬 Format Messages Multi-Canal
 
 ```
-# Réponse standard (tous canaux)
-🤖 [Résumé de ce que l'IA a fait]
+# Réponse standard
+🤖 [Résumé action]
 ─────────────────────
-📊 Modèle : DeepSeek V3 | Coût : ~0.001€
+📊 Modèle : DeepSeek V3 | Coût : ~0.001€ | Cache : ❌
 ⏱️ Temps : 1.2s | Confiance : 87% | Canal : Telegram
 
-# Message avec confirmation requise
+# Réponse depuis cache (Phase 2)
+⚡ [Réponse instantanée]
+─────────────────────
+📊 Cache sémantique | Coût : 0€ | Similarité : 99.2%
+
+# Liquid Time update
+⏳ [45s] Vérification formelle de l'action en cours...
+
+# Confirmation action risquée
 ⚠️ ACTION REQUISE
 ─────────────────────
 Je vais envoyer l'email suivant :
-À : jean@example.com
-Objet : Rapport Q3
+À : jean@example.com | Objet : Rapport Q3
+[Test formel : ✅ Prouvé]
 
 [Confirmer ✅] [Modifier ✏️] [Annuler ❌]
 
-# Suggestion proactive (Phase 02)
+# Suggestion proactive (Phase 3)
 💡 SUGGESTION
 ─────────────────────
-J'ai remarqué que tu envoies ce rapport
-chaque lundi manuellement depuis 3 semaines.
-Veux-tu que j'automatise ça ?
-
-[Oui, automatise 🚀] [Non merci ✋]
+J'ai détecté un pattern : tu envoies ce rapport
+chaque lundi depuis 3 semaines.
+[Automatiser 🚀] [Non merci ✋]
 ```
 
 ---
 
-## 📊 Métriques à Tracker (Langfuse)
+## 📊 Métriques Langfuse (par interaction)
 
-Pour chaque interaction, logger :
-- `model_used` : modèle sélectionné
-- `confidence_score` : score qui a déterminé le routing
-- `response_time_ms` : latence totale
-- `tokens_in` / `tokens_out` : consommation
-- `estimated_cost_eur` : coût estimé
-- `action_risk_level` : si une action MCP a été déclenchée
-- `simulation_triggered` : si la boucle simulation s'est activée
-- `user_confirmed` : si l'utilisateur a confirmé/refusé
-- `skill_compiled` : si un skill a été créé (Phase 05)
+```python
+{
+    "model_used": str,               # Modèle sélectionné
+    "cache_hit": bool,               # Semantic cache utilisé
+    "cache_similarity": float,       # Score similarité cache
+    "confidence_score": float,       # Score routing
+    "thinking_tokens": int,          # Tokens réflexion cachés (Phase 4)
+    "response_time_ms": int,
+    "tokens_in": int,
+    "tokens_out": int,
+    "estimated_cost_eur": float,
+    "action_risk_level": str,        # safe / risky / critical
+    "formal_verified": bool,         # Chain-of-Code exécuté
+    "red_team_passed": bool,         # Red-team local (si critical)
+    "simulation_triggered": bool,
+    "user_confirmed": bool,
+    "healing_triggered": bool,       # Self-healing MCP activé
+    "activation_nodes": int,         # Nœuds activés Spreading Activation
+    "skill_compiled": bool,          # Nouveau skill créé
+    "channel": str                   # Canal d'entrée
+}
+```
 
 ---
 
 ## 🚦 Instructions pour Claude Code
 
-### Avant de commencer une session
-1. Lis ce fichier `CLAUDE.md` intégralement
-2. Identifie la phase en cours (cherche `🔄 EN COURS`)
-3. Identifie la prochaine étape non cochée `[ ]`
-4. Vérifie qu'aucun step précédent n'est incomplet
+### Avant chaque session
+1. Lire ce fichier intégralement
+2. Identifier `🔄 EN COURS` et la première `[ ]` non cochée
+3. Vérifier qu'aucune étape précédente n'est incomplète
+4. Ne jamais sauter d'étape
 
 ### Pendant le développement
-- Implémente **un step à la fois** — ne saute pas d'étapes
-- Après chaque fichier créé : ajoute les tests correspondants
-- Respecte strictement les conventions de nommage
-- N'invente JAMAIS de bibliothèques ou d'APIs — utilise uniquement ce qui est listé dans ce fichier
-- Si tu as un doute sur un choix architectural : arrête et demande
+- **Un livrable à la fois** — commit après chaque fichier fonctionnel
+- **< 600 lignes par fichier** — découper si nécessaire
+- **Tests obligatoires** avant de cocher `[x]`
+- **Type hints partout**, async pour tout I/O
+- Ne jamais inventer de bibliothèques non listées ici
+- Si doute architectural → arrêter et demander
 
-### Après avoir implémenté une étape
-- Coche la case `[ ]` → `[x]` dans ce fichier
-- Mets à jour `CHANGELOG.md` avec ce qui a été fait
-- Génère ou mets à jour les tests si nécessaire
-- Si la phase est complète : mets à jour le statut `⏳` → `✅`
+### Après chaque étape
+- Cocher `[ ]` → `[x]` dans ce fichier
+- Ajouter entrée dans CHANGELOG.md
+- `git commit -m "feat(couche): description"` + `git push`
+- Si phase complète : `⏳` → `✅`
 
-### Ce que tu NE dois pas faire
-- ❌ Jamais utiliser des bibliothèques non listées sans validation
-- ❌ Jamais créer de fichiers .env avec de vraies valeurs
-- ❌ Jamais exposer des credentials dans le code
-- ❌ Jamais sauter l'étape tests pour "aller plus vite"
-- ❌ Jamais modifier l'architecture sans mise à jour de ce fichier
+### Interdictions absolues
+- ❌ Credentials dans le code ou le repo
+- ❌ `WORLDAI_COMPUTE_BIDDING_ENABLED=true` sans validation humaine explicite
+- ❌ Exposer stack traces à l'utilisateur final
+- ❌ Fichier > 600 lignes
+- ❌ Modifier l'architecture sans mettre à jour ce fichier
 
 ---
 
-## 🔗 Ressources Clés
+## 🔗 Ressources
 
 | Ressource | URL |
 |---|---|
-| OpenRouter API | https://openrouter.ai/docs |
-| xLAM-2 Models | https://github.com/SalesforceAIResearch/xLAM |
+| OpenRouter | https://openrouter.ai/docs |
+| xLAM-2 | https://github.com/SalesforceAIResearch/xLAM |
 | Memgraph Docs | https://memgraph.com/docs |
 | Qdrant Docs | https://qdrant.tech/documentation |
+| FastEmbed | https://github.com/qdrant/fastembed |
 | Synalinks | https://github.com/SynaLinks/synalinks |
 | LingBot-World | https://github.com/leofan90/awesome-world-models |
 | n8n Docs | https://docs.n8n.io |
 | Dify Docs | https://docs.dify.ai |
-| Coolify Docs | https://coolify.io/docs |
-| Hetzner Cloud | https://www.hetzner.com/cloud |
+| Coolify | https://coolify.io/docs |
+| Hetzner | https://www.hetzner.com/cloud |
+| RunPod API | https://docs.runpod.io/api |
 | python-telegram-bot | https://docs.python-telegram-bot.org |
 | discord.py | https://discordpy.readthedocs.io |
-| slack-bolt Python | https://slack.dev/bolt-python |
-| whatsapp-web.py | https://github.com/mukulhase/WebWhatsapp-Wrapper |
+| slack-bolt | https://slack.dev/bolt-python |
 | Twilio WhatsApp | https://www.twilio.com/docs/whatsapp |
 | aiosmtplib | https://aiosmtplib.readthedocs.io |
 | Playwright Python | https://playwright.dev/python |
 | Langfuse | https://langfuse.com/docs |
 | OMI Open Source | https://github.com/BasedHardware/omi |
-| MCP Protocol Spec | https://modelcontextprotocol.io |
-| MCP Servers officiels | https://github.com/modelcontextprotocol/servers |
+| MCP Protocol | https://modelcontextprotocol.io |
+| MCP Servers | https://github.com/modelcontextprotocol/servers |
+| DSPy | https://github.com/stanfordnlp/dspy |
+| Coqui TTS | https://github.com/coqui-ai/TTS |
 
 ---
 
-*Dernière mise à jour : Phase 01 — Étape 1.5 en cours (5/19 items) · Fondations gateway + Telegram ✅ · Adapters restants + handlers à faire*
-*Maintenu par : Alexis Druaux + Claude Code (Sonnet 4.6)*
+*Dernière mise à jour : Phase 01 partielle (1.1→1.4) · Architecture AGI 9 couches · Concepts Gemini intégrés (Intent Tracking, Persona Cloner, Analogie Cross-Domaine, Consensus Multi-Modèle, Autonomie Proactive, Paradigm Shift, Tool Synthesis, Dynamic Prompt Library, SMT Solvers Phase 7+)*
+*Maintenu par : Alexis Druaux + Claude Code (Opus 4.6)*
